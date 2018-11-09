@@ -8,7 +8,9 @@
 
 using namespace std;
 class Instrument {
-	virtual void load(string path) = 0;
+public:
+	Instrument() :samples(vector<YsSoundPlayer::SoundData>()), key(0) {}
+	virtual void load() = 0;
 	virtual void play() = 0;
 	virtual void draw() = 0;
 	virtual void setKey(int key) = 0;
