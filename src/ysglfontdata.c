@@ -12,7 +12,7 @@
 #include <OpenGL/glu.h>
 #endif
 
-#include "ysglfontdata.h"
+#include "..\include\ysglfontdata.h"
 
 
 unsigned char YsFont6x7_000[28]={

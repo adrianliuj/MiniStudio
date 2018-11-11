@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-#include "yssimplesound.h"
+#include "..\include\yssimplesound.h"
 
 YsSoundPlayer *YsSoundPlayer::currentPlayer=nullptr;
 

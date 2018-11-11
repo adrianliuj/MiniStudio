@@ -58,7 +58,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <gl/gl.h>
 #include <gl/glu.h>
 
-#include "fssimplewindow.h"
+#include "..\include\fssimplewindow.h"
 /* ////////////////////////////////////////////////////////////
 
 File Name: fswin32keymap.h
