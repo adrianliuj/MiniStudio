@@ -11,8 +11,8 @@ void Keyboard::load() {
 	// just manually add absolute path
 	// We cannot use vector<Sounddata> because of memory allocation problems
 	// path to source file subject to change
-	samples.push_back("..\\..\\resource\\keyboard\\A#0.wav");
-	samples.push_back("..\\..\\resource\\keyboard\\A#1.wav");
+	samples.push_back("..\\..\\resource\\keyboard\\deal.wav");
+	samples.push_back("..\\..\\resource\\keyboard\\beep.wav");
 	samples.push_back("..\\..\\resource\\keyboard\\A#2.wav");
 	samples.push_back("..\\..\\resource\\keyboard\\A#3.wav");
 	samples.push_back("..\\..\\resource\\keyboard\\A#4.wav");
@@ -27,19 +27,26 @@ void Keyboard::draw() {
 	return;
 }
 void Keyboard::play() {
-	cout << key_ << endl;
 	if (key_ < 0 || key_ > 9) return;
 	// create player and sounddata
-	YsSoundPlayer player;
-	YsSoundPlayer::SoundData sounddata;
-	auto res = sounddata.LoadWav(samples[key_].c_str());
-	player.Start();
+	//YsSoundPlayer player;
+	//YsSoundPlayer::SoundData sounddata;
+	//auto res = sounddata.LoadWav(samples[key_].c_str());
+	//player.Start();
 	// Subject to change
-	player.PlayOneShot(sounddata);
-	while (player.IsPlaying(sounddata)) {
-		player.KeepPlaying();
+	if (key_ == 0) {
+		data0.LoadWav("..\\..\\resource\\keyboard\\deal.wav");
+		player.PlayOneShot(data0);
 	}
-	player.End();
+	else if (key_ == 1) {
+		data1.LoadWav("..\\..\\resource\\keyboard\\deal.wav");
+		player.PlayOneShot(data1);
+	}
+	//data2.LoadWav("..\\..\\resource\\keyboard\\beep.wav");
+	//while (player.IsPlaying(sounddata)) {
+	//	player.KeepPlaying();
+	//}
+	//player.End();
 }
 void Keyboard::setKey(int key) {
 	//lets save the range of key is from 0 - 9
