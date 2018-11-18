@@ -1,8 +1,8 @@
-//#ifndef Guitar_h
-//#define Guitar_h
-//
-//
-//#endif /* Guitar_h */
+#ifndef Guitar_h
+#define Guitar_h
+
+
+#endif /* Guitar_h */
 
 extern YsSoundPlayer player;
 extern int windowW;
