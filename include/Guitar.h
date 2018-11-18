@@ -17,6 +17,7 @@ private:
     double wid=24,hei=140,widActive=26,heiActive=140;
     int colorR=153,colorG=153,colorB=255;
     int colorActiveR=77,colorActiveG=255,colorActiveB=77;
+    int key;
 //    int numIter=0;
 };
 
