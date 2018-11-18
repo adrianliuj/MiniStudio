@@ -42,6 +42,6 @@ private:
 	void drawBass() const;
 
 	chord chords[6];
-	YsSoundPlayer::SoundData wav[4]; 
+	YsSoundPlayer::SoundData wav[6]; 
 };
 #endif
