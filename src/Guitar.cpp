@@ -1,10 +1,3 @@
-//
-//  Guitar.cpp
-//  MiniStudioProject
-//
-//  Created by Kelly Zhang on 11/11/18.
-//
-
 #include "Instrument.h"
 #include "Guitar.h"
 #include "yspng.h"

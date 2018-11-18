@@ -1,10 +1,3 @@
-//
-//  Guitar.h
-//  MiniStudioProject
-//
-//  Created by Kelly Zhang on 11/15/18.
-//
-
 //#ifndef Guitar_h
 //#define Guitar_h
 //
