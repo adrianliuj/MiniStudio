@@ -17,10 +17,8 @@ private:
     double wid=24,hei=140,widActive=26,heiActive=140;
     int colorR=153,colorG=153,colorB=255;
     int colorActiveR=77,colorActiveG=255,colorActiveB=77;
-    int key;
 //    int numIter=0;
 };
-
 
 class Guitar:public Instrument{
 public:
@@ -36,4 +34,5 @@ private:
     void StopAll();
     GuitarChordBlock blkEm,blkAm,blkF,blkC,blkD,blkG,blkDm;
     YsSoundPlayer::SoundData Em,Am,F,C,D,G,Dm;
+    int key;
 };
