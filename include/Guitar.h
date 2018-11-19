@@ -1,8 +1,8 @@
-//#ifndef Guitar_h
-//#define Guitar_h
-//
-//
-//#endif /* Guitar_h */
+#ifndef Guitar_h
+#define Guitar_h
+
+
+#endif /* Guitar_h */
 
 extern YsSoundPlayer player;
 extern int windowW;
@@ -20,7 +20,6 @@ private:
 //    int numIter=0;
 };
 
-
 class Guitar:public Instrument{
 public:
     void Load();
@@ -35,4 +34,5 @@ private:
     void StopAll();
     GuitarChordBlock blkEm,blkAm,blkF,blkC,blkD,blkG,blkDm;
     YsSoundPlayer::SoundData Em,Am,F,C,D,G,Dm;
+    int key;
 };
