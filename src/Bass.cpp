@@ -154,8 +154,6 @@ void Bass::play() {
 		printf("Default\n");
 		break;
 	}
-	printf("%d\n", key);
-	player.End();
 }
 
 void Bass::setKey(int keyVal) {
