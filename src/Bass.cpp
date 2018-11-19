@@ -5,7 +5,6 @@
 #include "ysglfontdata.h"
 
 chord::chord() {
-	R = 100; G = 100; B = 100;
 	state = 0;
 	x = 0, y = 0;
 }
