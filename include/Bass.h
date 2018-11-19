@@ -22,7 +22,6 @@ public:
 private:
 	// state of string
 	int state = 0;
-	int R, G, B;
 	int x, y;
 };
 
