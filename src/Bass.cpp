@@ -142,25 +142,25 @@ void Bass::play() {
 		break;
 	case FSKEY_K:
 		chords[4].setState(1);
-		player.PlayOneShot(wav[2]);
+		player.PlayOneShot(wav[4]);
 		break;
 	case FSKEY_L:
 		chords[5].setState(1);
-		player.PlayOneShot(wav[2]);
+		player.PlayOneShot(wav[5]);
 		break;
 	default:
+		key = 0;
 		player.End();
+		printf("Default\n");
 		break;
 	}
-
+	printf("%d\n", key);
+	player.End();
 }
 
 void Bass::setKey(int keyVal) {
 	// assuming user input UIOPKL (subject to change)
-	if (keyVal != 0) {
-		key = keyVal;
-		printf("%d\n", key);
-	}
+	key = keyVal;
 }
 
 void Bass::drawBass() const {
