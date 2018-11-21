@@ -74,6 +74,9 @@ void chord::drawChord(int i) {
 		break;
 	case 5:
 		YsGlDrawFontBitmap16x20("6");
+		break;
+	case 6:
+		YsGlDrawFontBitmap16x20("7");
 	break;
 	}
 }
@@ -82,20 +85,21 @@ Bass::Bass() {
 	// load different Bass Sound Profiles
 	load();
 	// set up chords XY
-	chords[0].setXY(xW / 2 - 165 + xC, 60 + yC);
-	for (int i = 0; i < 6; i++) {
-		chords[i + 1].setXY(chords[i].getX() + 60, chords[i].getY() - 4);
+	chords[0].setXY(xW / 2 - 180 + xC, 60 + yC);
+	for (int i = 0; i < 7; i++) {
+		chords[i + 1].setXY(chords[i].getX() + 55, chords[i].getY() - 4);
 	}
 }
 
 void Bass::load() {
 	// load corresponding sound profile
 	wav[1].LoadWav("../BassSoundProfile/Am.wav");
-	wav[2].LoadWav("../BassSoundProfile/Dm.wav");
-	wav[3].LoadWav("../BassSoundProfile/Em.wav");
-	wav[4].LoadWav("../BassSoundProfile/G.wav");
-	wav[5].LoadWav("../BassSoundProfile/Am.wav");
-	wav[6].LoadWav("../BassSoundProfile/Dm.wav");
+	wav[2].LoadWav("../BassSoundProfile/C.wav");
+	wav[3].LoadWav("../BassSoundProfile/D.wav");
+	wav[4].LoadWav("../BassSoundProfile/Dm.wav");
+	wav[5].LoadWav("../BassSoundProfile/Em.wav");
+	wav[6].LoadWav("../BassSoundProfile/F.wav");
+	wav[7].LoadWav("../BassSoundProfile/G.wav");
 }
 
 void Bass::draw() {
@@ -103,7 +107,7 @@ void Bass::draw() {
 	drawBass();
 	
 	// draw six chord
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 7; i++) {
 		chords[i].drawChord(i);
 	}
 }
@@ -114,9 +118,9 @@ void Bass::play() {
 
 	// input keys for different Bass chord are set as UIOPKL
 	switch (key) {
+	// start playing sound based on keyboard input
 	case FSKEY_U:
 		StopAll();
-		// start playing sound
 		chords[0].setState(1);
 		player.PlayOneShot(wav[1]);
 		break;
@@ -135,15 +139,20 @@ void Bass::play() {
 		chords[3].setState(1);
 		player.PlayOneShot(wav[4]);
 		break;
-	case FSKEY_K:
+	case FSKEY_J:
 		StopAll();
 		chords[4].setState(1);
 		player.PlayOneShot(wav[5]);
 		break;
-	case FSKEY_L:
+	case FSKEY_K:
 		StopAll();
 		chords[5].setState(1);
 		player.PlayOneShot(wav[6]);
+		break;
+	case FSKEY_L:
+		StopAll();
+		chords[6].setState(1);
+		player.PlayOneShot(wav[7]);
 		break;
 	case FSKEY_T:
 		StopAll();
@@ -151,9 +160,6 @@ void Bass::play() {
 	default:
 		break;
 	}
-
-
-	//player.End();
 }
 
 void Bass::setKey(int keyVal) {
@@ -222,13 +228,13 @@ void Bass::drawBass() const {
 }
 
 void Bass::StopAll() {
-	for (int i = 1; i < 7; i++) {
+	for (int i = 1; i < 8; i++) {
 		player.Stop(wav[i]);
 	}
 }
 
 void Bass::resetState() {
-	for (int i = 1; i < 7; i++) {
+	for (int i = 1; i < 8; i++) {
 		if (player.IsPlaying(wav[i]) == 1) {
 			chords[i - 1].setState(1);
 		}

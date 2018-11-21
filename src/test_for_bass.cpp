@@ -4,8 +4,8 @@
 //global variable player
 YsSoundPlayer player;
 
-extern int windowW = 800;
-extern int windowH = 600;
+extern int windowW = 1000;
+extern int windowH = 800;
 
 int main(void) {
 
