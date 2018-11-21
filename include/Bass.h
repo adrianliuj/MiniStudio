@@ -2,6 +2,7 @@
 #define BASS_H_NOT_INCLUDED
 
 #include "Instrument.h"
+#include <vector>
 
 extern YsSoundPlayer player;
 extern int windowW;
@@ -35,12 +36,15 @@ public:
 	void setKey(int keyVal);
 
 private:
-	// position of bass section in the window 
-	int xC = 0, yC = 0;
+	// position and size of bass section in the window 
+	int xC = 100, yC = 100, xW = 400, yW = 300;
 	int key;
 	void drawBass() const;
+	void StopAll();
+	void resetState();
 
 	chord chords[6];
-	YsSoundPlayer::SoundData wav[6]; 
+	YsSoundPlayer::SoundData wav[7]; 
+
 };
 #endif
