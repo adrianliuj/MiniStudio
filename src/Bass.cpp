@@ -53,31 +53,33 @@ void chord::drawChord(int i) {
 		glVertex2i(x, y + 200);
 		glEnd();
 	}
-	glColor3f(0, 0, 0);
-	glRasterPos2d(getX()+10, getY()+110);
+	glColor3ub(50, 0, 0);
+	glRasterPos2d(getX()+5, getY()+110);
 	// will change name later, don't know the names
 	switch (i) {
 	case 0:
-		YsGlDrawFontBitmap16x20("1");
+		YsGlDrawFontBitmap16x20("Am");
 		break;
 	case 1:
-		YsGlDrawFontBitmap16x20("2");
+		YsGlDrawFontBitmap16x20("C");
 		break;
 	case 2:
-		YsGlDrawFontBitmap16x20("3");
+		YsGlDrawFontBitmap16x20("D");
 		break;
 	case 3:
-		YsGlDrawFontBitmap16x20("4");
+		YsGlDrawFontBitmap16x20("Dm");
 		break;
 	case 4:
-		YsGlDrawFontBitmap16x20("5");
+		YsGlDrawFontBitmap16x20("Em");
 		break;
 	case 5:
-		YsGlDrawFontBitmap16x20("6");
+		YsGlDrawFontBitmap16x20("F");
 		break;
 	case 6:
-		YsGlDrawFontBitmap16x20("7");
-	break;
+		YsGlDrawFontBitmap16x20("G");
+		break;
+	default:
+		break;
 	}
 }
 
@@ -100,6 +102,18 @@ void Bass::load() {
 	wav[5].LoadWav("../BassSoundProfile/Em.wav");
 	wav[6].LoadWav("../BassSoundProfile/F.wav");
 	wav[7].LoadWav("../BassSoundProfile/G.wav");
+
+	png1.Decode("../BassTexture/rawpixel-brown-wood.png");
+	png1.Flip();
+	printf("rawpixel-brown-wood.png loaded, width is %d, height is %d\n", png1.wid, png1.hei);
+
+	png2.Decode("../BassTexture/yann-allegre-dark-wood.png");
+	png2.Flip();
+	printf("yann-allegre-dark-wood.png loaded, width is %d, height is %d\n", png2.wid, png2.hei);
+
+	png3.Decode("../BassTexture/ruvim-noga-backgroud.png");
+	png3.Flip();
+	printf("ruvim-noga-backgroud.png loaded, width is %d, height is %d\n", png3.wid, png3.hei);
 }
 
 void Bass::draw() {
@@ -167,10 +181,43 @@ void Bass::setKey(int keyVal) {
 	key = keyVal;
 }
 
-void Bass::drawBass() const {
+void Bass::squareTextureMap(YsRawPngDecoder &png, int x1, int y1, int x2, int y2,
+	int x3, int y3, int x4, int y4) {
+
+	GLuint textID;
+	glGenTextures(1, &textID);
+	glBindTexture(GL_TEXTURE_2D, textID);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, png.wid, png.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, png.rgba);
+
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, textID);
+	glBegin(GL_QUADS);
+	glTexCoord2d(1.0, 1.0); glVertex2i(x1, y1);
+	glTexCoord2d(0.0, 1.0); glVertex2i(x2, y2);
+	glTexCoord2d(0.0, 0.0); glVertex2i(x3, y3);
+	glTexCoord2d(1.0, 0.0); glVertex2i(x4, y4);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void Bass::drawBass() {
 	// draw Bass
 	// inc is incline for bass
-	glBegin(GL_QUADS);
+	squareTextureMap(png3, xC, yC, xC + xW, yC, xC + xW, yC + yW, xC, yC + yW);
+	int inc = 30;
+	squareTextureMap(png1, xC, yC + inc, xC + xW, yC, xC + xW, yC + yW - inc, xC, yC + yW);
+	squareTextureMap(png2, xC, yC + inc + 20, xC + xW, yC + 20, xC + xW, yC + yW - 20 - inc, xC, yC + yW - 20);
+
+	/*glBegin(GL_QUADS);
 	glColor3ub(180, 180, 180);
 	glVertex2d(xC, yC);
 	glVertex2d(xC + xW, yC);
@@ -206,7 +253,7 @@ void Bass::drawBass() const {
 	glVertex2d(xC + xW, yC + yW-20 - inc);
 	glColor3ub(0, 0, 0);
 	glVertex2d(xC, yC + yW-20);
-	glEnd();
+	glEnd();*/
 	// draw strings
 	int y1;
 	for (int i = 0; i < 6; i++) {
