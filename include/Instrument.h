@@ -11,9 +11,9 @@ using namespace std;
 class Instrument {
 public:
 	Instrument() :samples(vector<string>()), key_(0) {}
-	virtual void load() = 0;
-	virtual void play() = 0;
-	virtual void draw() = 0;
+	virtual void Load() = 0;
+	virtual void Play() = 0;
+	virtual void Draw() = 0;
 	virtual void setKey(int key) = 0;
 protected:
 	//load all the sound data
