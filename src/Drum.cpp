@@ -26,6 +26,8 @@ YsSoundPlayer player;
 Drum_Class::Drum_Class()
 {
     key_ = 0;
+    hit_cycle1 = 0;
+    hit_cycle2 = 0;
     //init parameters for drawing
     load();
 }
@@ -118,7 +120,35 @@ void Drum_Class::play(){
 
 void Drum_Class::draw(){
     Draw_Drum(Drum1_X, Drum1_Y, DrumR1, Height1, Theta1, Rotation1);
+    {
+    if(key_==FSKEY_Q){
+        hit_cycle1 = 1;
+    }
+    if(hit_cycle1>0){
+        if(hit_cycle1>5){
+            hit_cycle1 = 0;
+        }
+        else{
+            hit_cycle1 += 1;
+            Draw_Hit(Drum1_X, Drum1_Y, DrumR1, Theta1, Rotation1);
+        }
+    }
+    }   //check and draw hit
     Draw_Drum(Drum2_X, Drum2_Y, DrumR2, Height2, Theta2, Rotation2);
+    {
+        if(key_==FSKEY_W){
+            hit_cycle2 = 1;
+        }
+        if(hit_cycle2>0){
+            if(hit_cycle2>5){
+                hit_cycle2 = 0;
+            }
+            else{
+                hit_cycle2 += 1;
+                Draw_Hit(Drum2_X, Drum2_Y, DrumR2, Theta2, Rotation2);
+            }
+        }
+    }   //check and draw hit
     key_ = 0;    //reset the key because it`s in render, later than Player()
 }
 
@@ -229,6 +259,20 @@ void Draw_Drum_Body(double x, double y, double DrumR, double Height, double Thet
 void Draw_Drum(double x, double y, double DrumR, double Height, double Theta, double Rotation){
     Draw_Drum_Body(x, y, DrumR, Height, Theta, Rotation);
     Draw_Drum_Face(x, y, DrumR, Theta, Rotation);
+}
+void Draw_Hit(double x, double y, double R, double Theta, double Rotation){
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    glColor4ub( 0, 0, 255, 70);   //alpha blending
+    glBegin(GL_POLYGON);
+    for(int i=0;i<65;i++){
+        double angle=(double)i*PI/32;
+        double xp=x + cos(angle)*R * cos(Rotation)-sin(angle)*R * cos(Theta)* sin(Rotation);
+        double yp=y + sin(angle)*R * cos(Theta) * cos(Rotation)+cos(angle)*R * sin(Rotation);
+        glVertex2dC(xp, yp);
+    }
+    glDisable(GL_BLEND);
+    glEnd();
 }
 
 int main(void){
