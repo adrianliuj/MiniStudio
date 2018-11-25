@@ -1,30 +1,40 @@
-#ifndef Drum_h
-#define Drum_h
+#ifndef DRUM_H_NOT_INCLUDED
+#define DRUM_H_NOT_INCLUDED
 
 #include "Instrument.h"
 
-extern YsSoundPlayer player;
+double CoordX(double x){
+    double Coordx = x;
+    return Coordx;
+}
+double CoordY(double y){
+    double Coordy = 300 - y;
+    return Coordy;
+}
+void glVertex2dC(double x, double y){
+    glVertex2d(CoordX(x), CoordY(y));
+}
 
-void DrawCircleProj(double x, double y, double R, double Theta, double Rotation, int r, int g, int b)
-void Draw_Drum_Face(double x, double y, double DrumR, double Theta, double Rotation)
-void Draw_Drum_Body(double x, double y, double DrumR, double Height, double Theta, double Rotation)
-void Draw_Drum(double x, double y, double DrumR, double Height, double Theta, double Rotation)
+void DrawCircleProj(double x, double y, double R, double Theta, double Rotation, int r, int g, int b);
+void Draw_Drum_Face(double x, double y, double DrumR, double Theta, double Rotation);
+void Draw_Drum_Body(double x, double y, double DrumR, double Height, double Theta, double Rotation);
+void Draw_Drum(double x, double y, double DrumR, double Height, double Theta, double Rotation);
 
-class Drum_Class//:public Instrument
+class Drum_Class:public Instrument
 {
 private:
-    int key;
-    YsSoundPlayer::SoundData hihat, hihatO, hitom1, hitom2, kick,
-    lowtom1, lowtom2, ride1, ride2, ridebell,
-    ridecrash, snare1, snare2, snareroll;
+    int key_;
+    YsSoundPlayer::SoundData hihat, hitom, kick,
+    lowtom, ride, ridebell,
+    ridecrash, snare, snareroll;
     //parameters for drawing
-    int x, y, z;
+//    int x, y, z;
 public:
-    Drum_Claas();
-    void Load();
-    void Setkey(int KeyVal);
-    void Play(YsSoundPlayer &player);
-    void Draw();
+    Drum_Class();
+    void load();
+    void setKey(int key);
+    void play();
+    void draw();
     
 };
 #endif /* Drum_h */
