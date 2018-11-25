@@ -1,7 +1,7 @@
 #ifndef BASS_H_NOT_INCLUDED
 #define BASS_H_NOT_INCLUDED
 
-#include "Instrument.h"
+//#include "Instrument.h"
 #include "yspng.h"
 
 extern YsSoundPlayer player;
@@ -30,14 +30,14 @@ class Bass : public Instrument {
 public:
 	Bass();
 
-	void load();
-	void play();
-	void draw();
+	void Load();
+	void Play();
+	void Draw();
 	void setKey(int keyVal);
 
 private:
 	// position and size of bass section in the window 
-	int xC = 300, yC = 400, xW = 400, yW = 300;
+	int xC = 400, yC = 300, xW = 400, yW = 300;
 	int key;
 	void drawBass();
 	void StopAll();

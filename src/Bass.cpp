@@ -1,4 +1,4 @@
-#include "..\Group Project\Instrument.h"
+#include "Instrument.h"
 #include "fssimplewindow.h"
 #include "yssimplesound.h"
 #include "Bass.h"
@@ -6,7 +6,8 @@
 
 chord::chord() {
 	state = 0;
-	x = 0, y = 0;
+    x = 0;
+    y = 0;
 }
 
 int chord::getState() {
@@ -85,7 +86,7 @@ void chord::drawChord(int i) {
 
 Bass::Bass() {
 	// load different Bass Sound Profiles
-	load();
+	Load();
 	// set up chords XY
 	chords[0].setXY(xW / 2 - 180 + xC, 60 + yC);
 	for (int i = 0; i < 7; i++) {
@@ -93,30 +94,31 @@ Bass::Bass() {
 	}
 }
 
-void Bass::load() {
+void Bass::Load() {
 	// load corresponding sound profile
-	wav[1].LoadWav("../BassSoundProfile/Am.wav");
-	wav[2].LoadWav("../BassSoundProfile/C.wav");
-	wav[3].LoadWav("../BassSoundProfile/D.wav");
-	wav[4].LoadWav("../BassSoundProfile/Dm.wav");
-	wav[5].LoadWav("../BassSoundProfile/Em.wav");
-	wav[6].LoadWav("../BassSoundProfile/F.wav");
-	wav[7].LoadWav("../BassSoundProfile/G.wav");
+    FsChangeToProgramDir();
+	wav[1].LoadWav("Am.wav");
+	wav[2].LoadWav("C.wav");
+	wav[3].LoadWav("D.wav");
+	wav[4].LoadWav("Dm.wav");
+	wav[5].LoadWav("Em.wav");
+	wav[6].LoadWav("F.wav");
+	wav[7].LoadWav("G.wav");
 
-	png1.Decode("../BassTexture/rawpixel-brown-wood.png");
+	png1.Decode("bass1.png");
 	png1.Flip();
 	printf("rawpixel-brown-wood.png loaded, width is %d, height is %d\n", png1.wid, png1.hei);
 
-	png2.Decode("../BassTexture/yann-allegre-dark-wood.png");
+	png2.Decode("bass3.png");
 	png2.Flip();
 	printf("yann-allegre-dark-wood.png loaded, width is %d, height is %d\n", png2.wid, png2.hei);
 
-	png3.Decode("../BassTexture/ruvim-noga-backgroud.png");
+	png3.Decode("bass2.png");
 	png3.Flip();
 	printf("ruvim-noga-backgroud.png loaded, width is %d, height is %d\n", png3.wid, png3.hei);
 }
 
-void Bass::draw() {
+void Bass::Draw() {
 	// draw Bass
 	drawBass();
 	
@@ -126,7 +128,7 @@ void Bass::draw() {
 	}
 }
 
-void Bass::play() {
+void Bass::Play() {
 
 	resetState();
 
