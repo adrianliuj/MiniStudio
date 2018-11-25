@@ -6,56 +6,50 @@
 #include "Drum.h"
 
 const double PI=3.1415926;
-const double Height1 = 50;
-const double DrumR1=50;
-const double Theta1 = PI/3;
-const double Rotation1 = -PI/24;
-const double Drum1_X = 200;
-const double Drum1_Y = 200;
 
-Drum_Class::Drum_Claas()
+const double Height1 = 30;//MOVE INTO the object in the future!!!
+const double DrumR1=70;
+const double Theta1 = PI/6;
+const double Rotation1 = 0;
+const double Drum1_X = 100;
+const double Drum1_Y = 100;
+
+const double Height2 = 30;
+const double DrumR2=50;
+const double Theta2 = PI/3;
+const double Rotation2 = PI/24;
+const double Drum2_X = 200;
+const double Drum2_Y = 100;
+
+YsSoundPlayer player;
+
+Drum_Class::Drum_Class()
 {
-    key = 0;
+    key_ = 0;
     //init parameters for drawing
-    Load();
+    load();
 }
 
-void Drum_Class::Load(){
+void Drum_Class::load(){
     
     if(YSOK!=hihat.LoadWav("../Drum/pearlkit-hihat.wav")){
         printf("Failed to read hihat\n");
     }
     
-    if(YSOK!=hihatO.LoadWav("../Drum/pearlkit-hihatO.wav")){
-        printf("Failed to read hihat0\n");
-    }
-    
-    if(YSOK!=hitom1.LoadWav("../Drum/pearlkit-hitom1.wav")){
+    if(YSOK!=hitom.LoadWav("../Drum/pearlkit-hitom1.wav")){
         printf("Failed to read hitom1\n");
-    }
-    
-    if(YSOK!= hitom2.LoadWav("../Drum/pearlkit-hitom2.wav")){
-        printf("Failed to read hitom2\n");
     }
     
     if(YSOK!=kick.LoadWav("../Drum/pearlkit-kick.wav")){
         printf("Failed to read kick\n");
     }
     
-    if(YSOK!=lowtom1.LoadWav("../Drum/pearlkit-lowtom1.wav")){
+    if(YSOK!=lowtom.LoadWav("../Drum/pearlkit-lowtom1.wav")){
         printf("Failed to read lowtom1\n");
     }
     
-    if(YSOK!=lowtom2.LoadWav("../Drum/pearlkit-lowtom2.wav")){
-        printf("Failed to read lowtom2\n");
-    }
-    
-    if(YSOK!=ride1.LoadWav("../Drum/pearlkit-ride1.wav")){
+    if(YSOK!=ride.LoadWav("../Drum/pearlkit-ride1.wav")){
         printf("Failed to read ride1\n");
-    }
-    
-    if(YSOK!= ride2.LoadWav("../Drum/pearlkit-ride2.wav")){
-        printf("Failed to read ride2\n");
     }
     
     if(YSOK!=ridebell.LoadWav("../Drum/pearlkit-ridebell.wav")){
@@ -66,76 +60,66 @@ void Drum_Class::Load(){
         printf("Failed to read ridecrash\n");
     }
     
-    if(YSOK!=snare1.LoadWav("../Drum/pearlkit-snare1.wav")){
+    if(YSOK!=snare.LoadWav("../Drum/pearlkit-snare1.wav")){
         printf("Failed to read snare1\n");
     }
-    if(YSOK!=snare2.LoadWav("../Drum/pearlkit-snare2.wav")){
-        printf("Failed to read snare2\n");
-    }
+    
     if(YSOK!=snareroll.LoadWav("../Drum/pearlkit-snareroll.wav")){
         printf("Failed to read snareroll\n");
     }
     
 }
 
-void Drum_Class::Setkey(int keyVal){
-    if(keyVal >0 && keyVal<=14)//the range is TBD
-    {
-        key=keyVal;
-    }
+void Drum_Class::setKey(int key){
+        key_=key;
 }
 
-void Drum_Class::Play(YsSoundPlayer &player){
-    switch (key) {
-        case 1:
-            player.PlayOneShot(hihat);//the specific realization is TBD
+void Drum_Class::play(){
+    switch (key_) {
+        case FSKEY_Q:
+            player.Stop(hihat);
+            player.PlayOneShot(hihat);
             break;
-        case 2:
-            player.PlayOneShot(hihatO);
-            break;
-        case 3:
-            player.PlayOneShot(hitom1);
-            break;
-        case 4:
-            player.PlayOneShot(hitom2);
-            break;
-        case 5:
-            player.PlayOneShot(kick);
-            break;
-        case 6:
-            player.PlayOneShot(lowtom1);
-            break;
-        case 7:
-            player.PlayOneShot(lowtom2);
-            break;
-        case 8:
-            player.PlayOneShot(ride1);
-            break;
-        case 9:
-            player.PlayOneShot(ride2);
-            break;
-        case 10:
+        case FSKEY_W:
+            player.Stop(ridebell);
             player.PlayOneShot(ridebell);
             break;
-        case 11:
+        case FSKEY_E:
+            player.Stop(hitom);
+            player.PlayOneShot(hitom);
+            break;
+        case FSKEY_A:
+            player.Stop(ridecrash);
             player.PlayOneShot(ridecrash);
             break;
-        case 12:
-            player.PlayOneShot(snare1);
+        case FSKEY_S:
+            player.Stop(kick);
+            player.PlayOneShot(kick);
             break;
-        case 13:
-            player.PlayOneShot(snare2);
+        case FSKEY_D:
+            player.Stop(lowtom);
+            player.PlayOneShot(lowtom);
             break;
-        case 14:
+        case FSKEY_Z:
+            player.Stop(snare);
+            player.PlayOneShot(snare);
+            break;
+        case FSKEY_X:
+            player.Stop(ride);
+            player.PlayOneShot(ride);
+            break;
+        case FSKEY_C:
+            player.Stop(snareroll);
             player.PlayOneShot(snareroll);
             break;
     }
     
 }
 
-void Drum_Class::Draw(){
+void Drum_Class::draw(){
     Draw_Drum(Drum1_X, Drum1_Y, DrumR1, Height1, Theta1, Rotation1);
-    key = 0;    //reset the key because it`s in render, later than Player()
+    Draw_Drum(Drum2_X, Drum2_Y, DrumR2, Height2, Theta2, Rotation2);
+    key_ = 0;    //reset the key because it`s in render, later than Player()
 }
 
 void DrawCircleProj(double x, double y, double R, double Theta, double Rotation, int r, int g, int b){
@@ -144,14 +128,14 @@ void DrawCircleProj(double x, double y, double R, double Theta, double Rotation,
         double angle=(double)i*PI/32;
         double xp=x + cos(angle)*R * cos(Rotation)-sin(angle)*R * cos(Theta)* sin(Rotation);
         double yp=y + sin(angle)*R * cos(Theta) * cos(Rotation)+cos(angle)*R * sin(Rotation);
-        glVertex2d(xp, yp);
+        glVertex2dC(xp, yp);
     }
 }
 void Draw_Drum_Face(double x, double y, double DrumR, double Theta, double Rotation){
     
     double r = DrumR;
     glBegin(GL_POLYGON);
-    DrawCircleProj(x, y, r, Theta, Rotation, 0, 0, 0);
+    DrawCircleProj(x, y, r, Theta, Rotation, 174, 179, 186);
     glEnd();
     
     r = 0.95 * DrumR;
@@ -186,71 +170,58 @@ void Draw_Drum_Body(double x, double y, double DrumR, double Height, double Thet
         }
     }
     //Draw Drum Body
-    //Draw the Body upper side
-    glColor3ub( 255, 0, 0);
-    if(i_max>32){
-        glBegin(GL_POLYGON);
-        for(int i=i_min;i<i_max+1;i++){
-            double angle=(double)i*PI/32;
-            double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) + 0.5 * Height;
-            glVertex2d(xp, yp);
-        }
+    glColor3ub( 130, 82, 1);
+    //Draw UpperLeft Corner
+    glBegin(GL_POLYGON);
+    {
+        double angle=(double)i_min*PI/32;
+        double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
+        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation);
+        glVertex2dC(xp, yp);
     }
-    else if(i_max<32){
-        glBegin(GL_POLYGON);
-        for(int i=i_min;i<65;i++){
-            double angle=(double)i*PI/32;
-            double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) + 0.5 * Height;
-            glVertex2d(xp, yp);
-        }
-        for(int i=0;i<i_max+1;i++){
-            double angle=(double)i*PI/32;
-            double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) + 0.5 * Height;
-            glVertex2d(xp, yp);
-        }
+    //Draw the Body upper side
+    {
+        double angle=(double)i_max*PI/32;
+        double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
+        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation);
+        glVertex2dC(xp, yp);
     }
     //Draw the Body right side
     {
         double angle=(double)i_max*PI/32;
         double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - 0.5 * Height;
-        glVertex2d(xp, yp);
-        printf("right: %f, %f", xp, yp);
+        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - Height;
+        glVertex2dC(xp, yp);
     }
     //Draw the Body lower side
     if(i_max>32){
         for(int i=i_max;i>i_min-1;i--){
             double angle=(double)i*PI/32;
             double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - 0.5 * Height;
-            glVertex2d(xp, yp);
+            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - Height;
+            glVertex2dC(xp, yp);
         }
     }
     else if(i_max<32){
-        glBegin(GL_POLYGON);
         for(int i=i_max;i>0;i--){
             double angle=(double)i*PI/32;
             double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - 0.5 * Height;
-            glVertex2d(xp, yp);
+            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - Height;
+            glVertex2dC(xp, yp);
         }
         for(int i=64;i>i_min-1;i--){
             double angle=(double)i*PI/32;
             double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - 0.5 * Height;
-            glVertex2d(xp, yp);
+            double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - Height;
+            glVertex2dC(xp, yp);
         }
     }
     //Draw the left side of the body
     {
         double angle=(double)i_min*PI/32;
         double xp=x + cos(angle)*DrumR * cos(Rotation)-sin(angle)*DrumR * cos(Theta)* sin(Rotation);
-        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - 0.5 * Height;
-        glVertex2d(xp, yp);
-        printf("left: %f, %f", xp, yp);
+        double yp=y + sin(angle)*DrumR * cos(Theta) * cos(Rotation)+cos(angle)*DrumR * sin(Rotation) - Height;
+        glVertex2dC(xp, yp);
     }
     glEnd();
     
@@ -260,23 +231,23 @@ void Draw_Drum(double x, double y, double DrumR, double Height, double Theta, do
     Draw_Drum_Face(x, y, DrumR, Theta, Rotation);
 }
 
-//int main(void){
-//    int keyVal = 0;
-//    YsSoundPlayer player;
-//    Drum_Claas Drum;
-//
-//
-//    player.Start();
-//
-//
-//    while( keyVal!=FSKEY_ESC ){
-//
-//        FsPollDevice();
-//        keyVal = FsInkey() - FSKEY_0;
-//        Drum.Setkey( keyVal );
-//        Drum.Play(player);
-//        FsSleep(25);
-//    }
-//
-//    player.End();
-//}
+int main(void){
+    int keyVal = 0;
+    Drum_Class Drum;
+
+    FsOpenWindow(16, 16, 400, 300, 1);
+    player.Start();
+
+
+    while( keyVal!=FSKEY_ESC ){
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        FsPollDevice();
+        Drum.setKey( FsInkey() );
+        Drum.play();
+        Drum.draw();
+        FsSwapBuffers();
+        FsSleep(25);
+    }
+
+    player.End();
+}
