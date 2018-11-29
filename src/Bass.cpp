@@ -219,43 +219,6 @@ void Bass::drawBass() {
 	squareTextureMap(png1, xC, yC + inc, xC + xW, yC, xC + xW, yC + yW - inc, xC, yC + yW);
 	squareTextureMap(png2, xC, yC + inc + 20, xC + xW, yC + 20, xC + xW, yC + yW - 20 - inc, xC, yC + yW - 20);
 
-	/*glBegin(GL_QUADS);
-	glColor3ub(180, 180, 180);
-	glVertex2d(xC, yC);
-	glVertex2d(xC + xW, yC);
-	glVertex2d(xC + xW, yC + yW);
-	glVertex2d(xC, yC + yW);
-	glEnd();
-	int inc = 30;
-	glBegin(GL_QUADS);
-	glColor3ub(149, 79, 29);
-	glVertex2d(xC, yC+inc);
-	glVertex2d(xC+xW, yC);
-	glVertex2d(xC+xW, yC+yW-inc);
-	glVertex2d(xC, yC+yW);
-	glEnd();
-	glShadeModel(GL_SMOOTH);
-	glBegin(GL_QUADS);
-	glColor3ub(0, 0, 0);
-	glVertex2d(xC, yC+20+inc);
-	glColor3ub(0, 0, 0);
-	glVertex2d(xC + xW, yC + 20);
-	glColor3ub(130, 60, 10);
-	glVertex2d(xC + xW, yC + yW/2-10);
-	glColor3ub(130, 60, 10);
-	glVertex2d(xC, yC + yW/2-10 + inc);
-	glEnd();
-	glShadeModel(GL_SMOOTH);
-	glBegin(GL_QUADS);
-	glColor3ub(130, 60, 10);
-	glVertex2d(xC, yC + yW/2-10 + inc);
-	glColor3ub(130, 60, 10);
-	glVertex2d(xC + xW, yC + yW/2-10);
-	glColor3ub(0, 0, 0);
-	glVertex2d(xC + xW, yC + yW-20 - inc);
-	glColor3ub(0, 0, 0);
-	glVertex2d(xC, yC + yW-20);
-	glEnd();*/
 	// draw strings
 	int y1;
 	for (int i = 0; i < 6; i++) {
