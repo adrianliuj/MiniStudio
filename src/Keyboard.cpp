@@ -29,7 +29,7 @@ Keyboard::Keyboard(){
 void Keyboard::Load() {
 //	C:\Often\24780\mini\new_proj\Debug is the program dir(exe dir)
 	FsChangeToProgramDir();
-	samples.push_back("../resource/keyboard/00.wav");
+	samples.push_back("../../../MiniStudio/resource/keyboard/00.wav");
 	samples.push_back("../resource/keyboard/01.wav");
 	samples.push_back("../resource/keyboard/02.wav");
 	samples.push_back("../resource/keyboard/03.wav");
