@@ -1,17 +1,17 @@
-#include "../include/Guitar.h"
-#include <math.h>
+//#include "Instrument.h"
+#include "Guitar.h"
+//#include "yspng.h"
+//#include <math.h>
+//#include "ysglfontdata.h"
+
 void GuitarChordBlock::DrawChordBlock(int chordNum){
     
     double margin=15;
     double x,y;
     
-    x=(windowW-85)-chordNum*(margin+wid)+400;
-    y=windowH/2;
     
-//    if(numIter>24){
-//        isPlaying=false;
-//        numIter=0;
-//    }
+    x=(windowW-85)-(8-chordNum)*(margin+wid)+400;
+    y=windowH/2;
     
     if (isPlaying==false){
         // Draw shape with colorR, colorG and colorB & dimensions wid, hei.
@@ -43,36 +43,56 @@ void GuitarChordBlock::DrawChordBlock(int chordNum){
     // label chord names
     glColor3f(0,0,0);
     switch (chordNum) {
-        case 1:
+        case 5:
             glRasterPos2d(x-9,y-40);
             YsGlDrawFontBitmap10x14("Em");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("F");
             break;
-        case 2:
+        case 1:
             glRasterPos2d(x-9,y-40);
             YsGlDrawFontBitmap10x14("Am");
-            break;
-        case 3:
-            glRasterPos2d(x-5,y-40);
-            YsGlDrawFontBitmap10x14("F");
-            break;
-        case 4:
-            glRasterPos2d(x-5,y-40);
-            YsGlDrawFontBitmap10x14("C");
-            break;
-        case 5:
-            glRasterPos2d(x-5,y-40);
-            YsGlDrawFontBitmap10x14("D");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("G");
             break;
         case 6:
             glRasterPos2d(x-5,y-40);
-            YsGlDrawFontBitmap10x14("G");
+            YsGlDrawFontBitmap10x14("F");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("H");
+            break;
+        case 2:
+            glRasterPos2d(x-5,y-40);
+            YsGlDrawFontBitmap10x14("C");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("V");
+            break;
+        case 3:
+            glRasterPos2d(x-5,y-40);
+            YsGlDrawFontBitmap10x14("D");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("B");
             break;
         case 7:
+            glRasterPos2d(x-5,y-40);
+            YsGlDrawFontBitmap10x14("G");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("N");
+            break;
+        case 4:
             glRasterPos2d(x-9,y-40);
             YsGlDrawFontBitmap10x14("Dm");
+            glColor3ub(255,0,0);
+            glRasterPos2d(x-5,y+60);
+            YsGlDrawFontBitmap8x12("M");
             break;
     }
-//    numIter+=1;
 }
 
 void Guitar::Load(){
@@ -366,12 +386,12 @@ void Guitar::DrawGuitarBackground() const{
 
 void Guitar::Draw(){
     DrawGuitarBackground();
-    blkEm.DrawChordBlock(1);
-    blkAm.DrawChordBlock(2);
-    blkF.DrawChordBlock(3);
-    blkC.DrawChordBlock(4);
-    blkD.DrawChordBlock(5);
-    blkG.DrawChordBlock(6);
-    blkDm.DrawChordBlock(7);
+    blkAm.DrawChordBlock(1);
+    blkC.DrawChordBlock(2);
+    blkD.DrawChordBlock(3);
+    blkDm.DrawChordBlock(4);
+    blkEm.DrawChordBlock(5);
+    blkF.DrawChordBlock(6);
+    blkG.DrawChordBlock(7);
 }
 
