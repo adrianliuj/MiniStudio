@@ -1,12 +1,9 @@
 #ifndef BASS_H_NOT_INCLUDED
 #define BASS_H_NOT_INCLUDED
 
-//#include "Instrument.h"
-#include "yspng.h"
-
-extern YsSoundPlayer player;
-extern int windowW;
-extern int windowH;
+#include "Instrument.h"
+//extern int windowW;
+//extern int windowH;
 
 class chord {
 public:

@@ -29,13 +29,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdio.h>
 
-#include "yspng.h"
-
-
-
+#include "../include/yspng.h"
 unsigned int YsGenericPngDecoder::verboseMode=YSFALSE;
-
-
 
 // Updates
 //   2005/03/02

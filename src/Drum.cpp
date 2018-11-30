@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "yssimplesound.h"
-#include "fssimplewindow.h"
 #include <math.h>
-#include "Drum.h"
+#include "../include/Drum.h"
 
 const double PI=3.1415926;
 
@@ -21,48 +17,67 @@ const double Rotation2 = PI/24;
 const double Drum2_X = 200;
 const double Drum2_Y = 100;
 
-YsSoundPlayer player;
+//YsSoundPlayer player;
 
-Drum_Class::Drum_Class()
+double CoordX(double x){
+    double Coordx = x;
+    return Coordx;
+}
+double CoordY(double y){
+    double Coordy = 600 - y;
+    return Coordy;
+}
+void glVertex2dC(double x, double y){
+    glVertex2d(CoordX(x), CoordY(y));
+}
+
+void DrawCircleProj(double x, double y, double R, double Theta, double Rotation, int r, int g, int b);
+void Draw_Drum_Face(double x, double y, double DrumR, double Theta, double Rotation);
+void Draw_Drum_Body(double x, double y, double DrumR, double Height, double Theta, double Rotation);
+void Draw_Drum(double x, double y, double DrumR, double Height, double Theta, double Rotation);
+void Draw_Hit(double x, double y, double R, double Theta, double Rotation);
+
+
+Drum::Drum()
 {
-    key_ = 0;
+    key = 0;
     hit_cycle1 = 0;
     hit_cycle2 = 0;
     //init parameters for drawing
-    load();
+    Load();
 }
 
-void Drum_Class::load(){
+void Drum::Load(){
     
-    if(YSOK!=hihat.LoadWav("../Drum/pearlkit-hihat.wav")){
+    if(YSOK!=hihat.LoadWav("pearlkit-hihat.wav")){
         printf("Failed to read hihat\n");
     }
     
-    if(YSOK!=hitom.LoadWav("../Drum/pearlkit-hitom1.wav")){
+    if(YSOK!=hitom.LoadWav("pearlkit-hitom1.wav")){
         printf("Failed to read hitom1\n");
     }
     
-    if(YSOK!=kick.LoadWav("../Drum/pearlkit-kick.wav")){
+    if(YSOK!=kick.LoadWav("pearlkit-kick.wav")){
         printf("Failed to read kick\n");
     }
     
-    if(YSOK!=lowtom.LoadWav("../Drum/pearlkit-lowtom1.wav")){
+    if(YSOK!=lowtom.LoadWav("pearlkit-lowtom1.wav")){
         printf("Failed to read lowtom1\n");
     }
     
-    if(YSOK!=ride.LoadWav("../Drum/pearlkit-ride1.wav")){
+    if(YSOK!=ride.LoadWav("pearlkit-ride1.wav")){
         printf("Failed to read ride1\n");
     }
     
-    if(YSOK!=ridebell.LoadWav("../Drum/pearlkit-ridebell.wav")){
+    if(YSOK!=ridebell.LoadWav("pearlkit-ridebell.wav")){
         printf("Failed to read ridebell\n");
     }
     
-    if(YSOK!=ridecrash.LoadWav("../Drum/pearlkit-ridecrash.wav")){
+    if(YSOK!=ridecrash.LoadWav("pearlkit-ridecrash.wav")){
         printf("Failed to read ridecrash\n");
     }
     
-    if(YSOK!=snare.LoadWav("../Drum/pearlkit-snare1.wav")){
+    if(YSOK!=snare.LoadWav("pearlkit-snare1.wav")){
         printf("Failed to read snare1\n");
     }
     
@@ -72,12 +87,12 @@ void Drum_Class::load(){
     
 }
 
-void Drum_Class::setKey(int key){
-        key_=key;
+void Drum::setKey(int keyVal){
+        key=keyVal;
 }
 
-void Drum_Class::play(){
-    switch (key_) {
+void Drum::Play(){
+    switch (key) {
         case FSKEY_Q:
             player.Stop(hihat);
             player.PlayOneShot(hihat);
@@ -118,10 +133,10 @@ void Drum_Class::play(){
     
 }
 
-void Drum_Class::draw(){
+void Drum::Draw(){
     Draw_Drum(Drum1_X, Drum1_Y, DrumR1, Height1, Theta1, Rotation1);
     {
-    if(key_==FSKEY_Q){
+    if(key==FSKEY_Q){
         hit_cycle1 = 1;
     }
     if(hit_cycle1>0){
@@ -136,7 +151,7 @@ void Drum_Class::draw(){
     }   //check and draw hit
     Draw_Drum(Drum2_X, Drum2_Y, DrumR2, Height2, Theta2, Rotation2);
     {
-        if(key_==FSKEY_W){
+        if(key==FSKEY_W){
             hit_cycle2 = 1;
         }
         if(hit_cycle2>0){
@@ -149,7 +164,7 @@ void Drum_Class::draw(){
             }
         }
     }   //check and draw hit
-    key_ = 0;    //reset the key because it`s in render, later than Player()
+    key = 0;    //reset the key because it`s in render, later than Player()
 }
 
 void DrawCircleProj(double x, double y, double R, double Theta, double Rotation, int r, int g, int b){
@@ -273,25 +288,4 @@ void Draw_Hit(double x, double y, double R, double Theta, double Rotation){
     }
     glDisable(GL_BLEND);
     glEnd();
-}
-
-int main(void){
-    int keyVal = 0;
-    Drum_Class Drum;
-
-    FsOpenWindow(16, 16, 400, 300, 1);
-    player.Start();
-
-
-    while( keyVal!=FSKEY_ESC ){
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        FsPollDevice();
-        Drum.setKey( FsInkey() );
-        Drum.play();
-        Drum.draw();
-        FsSwapBuffers();
-        FsSleep(25);
-    }
-
-    player.End();
 }

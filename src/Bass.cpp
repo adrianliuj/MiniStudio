@@ -1,9 +1,4 @@
-#include "Instrument.h"
-#include "fssimplewindow.h"
-#include "yssimplesound.h"
-#include "Bass.h"
-#include "ysglfontdata.h"
-
+#include "../include/Bass.h"
 chord::chord() {
 	state = 0;
     x = 0;
@@ -97,13 +92,13 @@ Bass::Bass() {
 void Bass::Load() {
 	// load corresponding sound profile
     FsChangeToProgramDir();
-	wav[1].LoadWav("Am.wav");
-	wav[2].LoadWav("C.wav");
-	wav[3].LoadWav("D.wav");
-	wav[4].LoadWav("Dm.wav");
-	wav[5].LoadWav("Em.wav");
-	wav[6].LoadWav("F.wav");
-	wav[7].LoadWav("G.wav");
+	wav[1].LoadWav("bassAm.wav");
+	wav[2].LoadWav("bassC.wav");
+	wav[3].LoadWav("bassD.wav");
+	wav[4].LoadWav("bassDm.wav");
+	wav[5].LoadWav("bassEm.wav");
+	wav[6].LoadWav("bassF.wav");
+	wav[7].LoadWav("bassG.wav");
 
 	png1.Decode("bass1.png");
 	png1.Flip();
@@ -219,6 +214,43 @@ void Bass::drawBass() {
 	squareTextureMap(png1, xC, yC + inc, xC + xW, yC, xC + xW, yC + yW - inc, xC, yC + yW);
 	squareTextureMap(png2, xC, yC + inc + 20, xC + xW, yC + 20, xC + xW, yC + yW - 20 - inc, xC, yC + yW - 20);
 
+	/*glBegin(GL_QUADS);
+	glColor3ub(180, 180, 180);
+	glVertex2d(xC, yC);
+	glVertex2d(xC + xW, yC);
+	glVertex2d(xC + xW, yC + yW);
+	glVertex2d(xC, yC + yW);
+	glEnd();
+	int inc = 30;
+	glBegin(GL_QUADS);
+	glColor3ub(149, 79, 29);
+	glVertex2d(xC, yC+inc);
+	glVertex2d(xC+xW, yC);
+	glVertex2d(xC+xW, yC+yW-inc);
+	glVertex2d(xC, yC+yW);
+	glEnd();
+	glShadeModel(GL_SMOOTH);
+	glBegin(GL_QUADS);
+	glColor3ub(0, 0, 0);
+	glVertex2d(xC, yC+20+inc);
+	glColor3ub(0, 0, 0);
+	glVertex2d(xC + xW, yC + 20);
+	glColor3ub(130, 60, 10);
+	glVertex2d(xC + xW, yC + yW/2-10);
+	glColor3ub(130, 60, 10);
+	glVertex2d(xC, yC + yW/2-10 + inc);
+	glEnd();
+	glShadeModel(GL_SMOOTH);
+	glBegin(GL_QUADS);
+	glColor3ub(130, 60, 10);
+	glVertex2d(xC, yC + yW/2-10 + inc);
+	glColor3ub(130, 60, 10);
+	glVertex2d(xC + xW, yC + yW/2-10);
+	glColor3ub(0, 0, 0);
+	glVertex2d(xC + xW, yC + yW-20 - inc);
+	glColor3ub(0, 0, 0);
+	glVertex2d(xC, yC + yW-20);
+	glEnd();*/
 	// draw strings
 	int y1;
 	for (int i = 0; i < 6; i++) {

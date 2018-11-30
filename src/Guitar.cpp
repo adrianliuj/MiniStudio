@@ -1,15 +1,11 @@
-#include "Instrument.h"
-#include "Guitar.h"
-#include "yspng.h"
+#include "../include/Guitar.h"
 #include <math.h>
-#include "ysglfontdata.h"
-
 void GuitarChordBlock::DrawChordBlock(int chordNum){
     
     double margin=15;
     double x,y;
     
-    x=(windowW-85)-chordNum*(margin+wid);
+    x=(windowW-85)-chordNum*(margin+wid)+400;
     y=windowH/2;
     
 //    if(numIter>24){
@@ -192,17 +188,17 @@ void Guitar::DrawGuitarBackground() const{
     // Draw guitar background elements
     // draw background color
 //    glColor3ub(179,89,0);
+    glLineWidth(1.0f);
     glColor3ub(230,153,0);
-
     glBegin(GL_QUADS);
-    glVertex2i(0,0);
-    glVertex2i(windowW,0);
-    glVertex2i(windowW,windowH);
-    glVertex2i(0,windowH);
+    glVertex2i(400,0);
+    glVertex2i(400+windowW,0);
+    glVertex2i(400+windowW,windowH);
+    glVertex2i(400,windowH);
     glEnd();
     
     // draw guitar body
-    int cx = windowW/2+50;
+    int cx = windowW/2+50+400;
     int cy = windowH/2;
     int num_segments=500;
     glShadeModel(GL_SMOOTH);
@@ -224,7 +220,7 @@ void Guitar::DrawGuitarBackground() const{
     }
     glEnd();
     
-    cx = windowW/2+50;
+    cx = windowW/2+50+400;
     cy = windowH/2;
     
     // draw center hole
@@ -295,7 +291,7 @@ void Guitar::DrawGuitarBackground() const{
     glEnd();
     
     // draw fretboard
-    double fretX = windowW/2;
+    double fretX = windowW/2+400;
     double fretY = windowH/2;
     double fretW = windowW;
     double fretH = 120; // adjust fretboard half width
@@ -325,7 +321,7 @@ void Guitar::DrawGuitarBackground() const{
     glEnd();
     
     // draw six uitar strings
-    double stringX=windowW/2;;
+    double stringX=windowW/2+400;
     double stringSpc=18;
     double stringY = windowH/2+45;
     double stringW = windowW;
@@ -357,6 +353,15 @@ void Guitar::DrawGuitarBackground() const{
         glVertex2d(stringX-stringW/2,stringY2-i*stringSpc+stringH/4);
         glEnd();
     }
+
+    // COVER UP -- TEMPORARY FIX
+    glColor3ub(255,255,255);
+    glBegin(GL_QUADS);
+    glVertex2i(400,300);
+    glVertex2i(400+windowW,300);
+    glVertex2i(400+windowW,windowH+300);
+    glVertex2i(400,windowH+300);
+    glEnd();
 }
 
 void Guitar::Draw(){
