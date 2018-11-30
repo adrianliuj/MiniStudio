@@ -29,16 +29,16 @@ Keyboard::Keyboard(){
 void Keyboard::Load() {
 //	C:\Often\24780\mini\new_proj\Debug is the program dir(exe dir)
 	FsChangeToProgramDir();
-	samples.push_back("../../../MiniStudio/resource/keyboard/00.wav");
-	samples.push_back("../resource/keyboard/01.wav");
-	samples.push_back("../resource/keyboard/02.wav");
-	samples.push_back("../resource/keyboard/03.wav");
-	samples.push_back("../resource/keyboard/04.wav");
-	samples.push_back("../resource/keyboard/05.wav");
-	samples.push_back("../resource/keyboard/06.wav");
-	samples.push_back("../resource/keyboard/07.wav");
-	samples.push_back("../resource/keyboard/08.wav");
-	samples.push_back("../resource/keyboard/09.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/00.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/01.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/02.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/03.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/04.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/05.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/06.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/07.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/08.wav");
+	samples.push_back("../../MiniStudio//resource/keyboard/09.wav");
 	return;
 }
 void Keyboard::Draw() {

@@ -119,23 +119,23 @@ Bass::Bass() {
 void Bass::Load() {
 	// load corresponding sound profile
     FsChangeToProgramDir();
-	wav[1].LoadWav("../resource/bass/bassAm.wav");
-	wav[2].LoadWav("../resource/bass/bassC.wav");
-	wav[3].LoadWav("../resource/bass/bassD.wav");
-	wav[4].LoadWav("../resource/bass/bassDm.wav");
-	wav[5].LoadWav("../resource/bass/bassEm.wav");
-	wav[6].LoadWav("../resource/bass/bassF.wav");
-	wav[7].LoadWav("../resource/bass/bassG.wav");
+	wav[1].LoadWav("../../MiniStudio/resource/bass/bassAm.wav");
+	wav[2].LoadWav("../../MiniStudio/resource/bass/bassC.wav");
+	wav[3].LoadWav("../../MiniStudio/resource/bass/bassD.wav");
+	wav[4].LoadWav("../../MiniStudio/resource/bass/bassDm.wav");
+	wav[5].LoadWav("../../MiniStudio/resource/bass/bassEm.wav");
+	wav[6].LoadWav("../../MiniStudio/resource/bass/bassF.wav");
+	wav[7].LoadWav("../../MiniStudio/resource/bass/bassG.wav");
 
-	png1.Decode("../resource/img/bass1.png");
+	png1.Decode("../../MiniStudio/resource/img/bass1.png");
 	png1.Flip();
 	printf("rawpixel-brown-wood.png loaded, width is %d, height is %d\n", png1.wid, png1.hei);
 
-	png2.Decode("../resource/img/bass3.png");
+	png2.Decode("../../MiniStudio/resource/img/bass3.png");
 	png2.Flip();
 	printf("yann-allegre-dark-wood.png loaded, width is %d, height is %d\n", png2.wid, png2.hei);
 
-	png3.Decode("../resource/img/bass2.png");
+	png3.Decode("../../MiniStudio//resource/img/bass2.png");
 	png3.Flip();
 	printf("ruvim-noga-backgroud.png loaded, width is %d, height is %d\n", png3.wid, png3.hei);
 }
