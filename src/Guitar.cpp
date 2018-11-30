@@ -1,5 +1,5 @@
 //#include "Instrument.h"
-#include "Guitar.h"
+#include "../include/Guitar.h"
 //#include "yspng.h"
 //#include <math.h>
 //#include "ysglfontdata.h"
@@ -159,43 +159,43 @@ void Guitar::Play(){
         case FSKEY_F:
             StopAll();
             blkEm.isPlaying=true;
-            Em.LoadWav("Em.wav");
+            Em.LoadWav("../resource/guitar/Em.wav");
             player.PlayOneShot(Em);
             break;
         case FSKEY_G:
             StopAll();
             blkAm.isPlaying=true;
-            Am.LoadWav("Am.wav");
+            Am.LoadWav("../resource/guitar/Am.wav");
             player.PlayOneShot(Am);
             break;
         case FSKEY_H:
             StopAll();
             blkF.isPlaying=true;
-            F.LoadWav("F.wav");
+            F.LoadWav("../resource/guitar/F.wav");
             player.PlayOneShot(F);
             break;
         case FSKEY_V:
             StopAll();
             blkC.isPlaying=true;
-            C.LoadWav("C.wav");
+            C.LoadWav("../resource/guitar/C.wav");
             player.PlayOneShot(C);
             break;
         case FSKEY_B:
             StopAll();
             blkD.isPlaying=true;
-            D.LoadWav("D.wav");
+            D.LoadWav("../resource/guitar/D.wav");
             player.PlayOneShot(D);
             break;
         case FSKEY_N:
             StopAll();
             blkG.isPlaying=true;
-            G.LoadWav("G.wav");
+            G.LoadWav("../resource/guitar/G.wav");
             player.PlayOneShot(G);
             break;
         case FSKEY_M:
             StopAll();
             blkDm.isPlaying=true;
-            Dm.LoadWav("Dm.wav");
+            Dm.LoadWav("../resource/guitar/Dm.wav");
             player.PlayOneShot(Dm);
             break;
         case FSKEY_T:

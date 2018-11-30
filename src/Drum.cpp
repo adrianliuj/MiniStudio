@@ -49,39 +49,39 @@ Drum::Drum()
 
 void Drum::Load(){
     
-    if(YSOK!=hihat.LoadWav("pearlkit-hihat.wav")){
+    if(YSOK!=hihat.LoadWav("../resource/drum/pearlkit-hihat.wav")){
         printf("Failed to read hihat\n");
     }
     
-    if(YSOK!=hitom.LoadWav("pearlkit-hitom1.wav")){
+    if(YSOK!=hitom.LoadWav("../resource/drum/pearlkit-hitom1.wav")){
         printf("Failed to read hitom1\n");
     }
     
-    if(YSOK!=kick.LoadWav("pearlkit-kick.wav")){
+    if(YSOK!=kick.LoadWav("../resource/drum/pearlkit-kick.wav")){
         printf("Failed to read kick\n");
     }
     
-    if(YSOK!=lowtom.LoadWav("pearlkit-lowtom1.wav")){
+    if(YSOK!=lowtom.LoadWav("../resource/drum/pearlkit-lowtom1.wav")){
         printf("Failed to read lowtom1\n");
     }
     
-    if(YSOK!=ride.LoadWav("pearlkit-ride1.wav")){
+    if(YSOK!=ride.LoadWav("../resource/drum/pearlkit-ride1.wav")){
         printf("Failed to read ride1\n");
     }
     
-    if(YSOK!=ridebell.LoadWav("pearlkit-ridebell.wav")){
+    if(YSOK!=ridebell.LoadWav("../resource/drum/pearlkit-ridebell.wav")){
         printf("Failed to read ridebell\n");
     }
     
-    if(YSOK!=ridecrash.LoadWav("pearlkit-ridecrash.wav")){
+    if(YSOK!=ridecrash.LoadWav("../resource/drum/pearlkit-ridecrash.wav")){
         printf("Failed to read ridecrash\n");
     }
     
-    if(YSOK!=snare.LoadWav("pearlkit-snare1.wav")){
+    if(YSOK!=snare.LoadWav("../resource/drum/pearlkit-snare1.wav")){
         printf("Failed to read snare1\n");
     }
     
-    if(YSOK!=snareroll.LoadWav("../Drum/pearlkit-snareroll.wav")){
+    if(YSOK!=snareroll.LoadWav("../resource/drum/pearlkit-snareroll.wav")){
         printf("Failed to read snareroll\n");
     }
     

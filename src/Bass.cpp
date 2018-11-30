@@ -1,4 +1,10 @@
+//#include "Instrument.h"
+//#include "fssimplewindow.h"
+//#include "yssimplesound.h"
 #include "../include/Bass.h"
+//#include "ysglfontdata.h"
+//#include <stdio.h>
+
 chord::chord() {
 	state = 0;
     x = 0;
@@ -27,56 +33,77 @@ void chord::setXY(int X, int Y) {
 }
 
 void chord::drawChord(int i) {
-	// enabling blend (in case not enabled in main)
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-
-	if(this->getState()==1) {
-		glColor4ub(135, 200, 240, 150);
-		glBegin(GL_QUADS);
-		glVertex2i(x-10, y-10);
-		glVertex2i(x+40, y-10);
-		glVertex2i(x+40, y+210);
-		glVertex2i(x-10, y+210);
-		glEnd();
-	}
-	else {
-		glColor4ub(200, 200, 200, 150);
-		glBegin(GL_QUADS);
-		glVertex2i(x, y);
-		glVertex2i(x+30, y);
-		glVertex2i(x+30, y + 200);
-		glVertex2i(x, y + 200);
-		glEnd();
-	}
-	glColor3ub(50, 0, 0);
-	glRasterPos2d(getX()+5, getY()+110);
-	// will change name later, don't know the names
-	switch (i) {
-	case 0:
-		YsGlDrawFontBitmap16x20("Am");
-		break;
-	case 1:
-		YsGlDrawFontBitmap16x20("C");
-		break;
-	case 2:
-		YsGlDrawFontBitmap16x20("D");
-		break;
-	case 3:
-		YsGlDrawFontBitmap16x20("Dm");
-		break;
-	case 4:
-		YsGlDrawFontBitmap16x20("Em");
-		break;
-	case 5:
-		YsGlDrawFontBitmap16x20("F");
-		break;
-	case 6:
-		YsGlDrawFontBitmap16x20("G");
-		break;
-	default:
-		break;
-	}
+    // enabling blend (in case not enabled in main)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    
+    if (this->getState() == 1) {
+        glColor4ub(135, 200, 240, 150);
+        glBegin(GL_QUADS);
+        glVertex2i(x - 10, y - 10);
+        glVertex2i(x + 40, y - 10);
+        glVertex2i(x + 40, y + 210);
+        glVertex2i(x - 10, y + 210);
+        glEnd();
+    }
+    else {
+        glColor4ub(200, 200, 200, 150);
+        glBegin(GL_QUADS);
+        glVertex2i(x, y);
+        glVertex2i(x + 30, y);
+        glVertex2i(x + 30, y + 200);
+        glVertex2i(x, y + 200);
+        glEnd();
+    }
+    glColor3ub(50, 0, 0);
+    glRasterPos2d(getX() + 5, getY() + 110);
+    // will change name later, don't know the names
+    switch (i) {
+        case 0:
+            YsGlDrawFontBitmap16x20("Am");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600-10);
+            YsGlDrawFontBitmap16x20("U");
+            break;
+        case 1:
+            YsGlDrawFontBitmap16x20("C");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("I");
+            break;
+        case 2:
+            YsGlDrawFontBitmap16x20("D");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("O");
+            break;
+        case 3:
+            YsGlDrawFontBitmap16x20("Dm");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("P");
+            break;
+        case 4:
+            YsGlDrawFontBitmap16x20("Em");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("J");
+            break;
+        case 5:
+            YsGlDrawFontBitmap16x20("F");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("K");
+            break;
+        case 6:
+            YsGlDrawFontBitmap16x20("G");
+            glColor3ub(255, 0, 0);
+            glRasterPos2d(getX() + 6, 600 - 10);
+            YsGlDrawFontBitmap16x20("L");
+            break;
+        default:
+            break;
+    }
 }
 
 Bass::Bass() {
@@ -92,23 +119,23 @@ Bass::Bass() {
 void Bass::Load() {
 	// load corresponding sound profile
     FsChangeToProgramDir();
-	wav[1].LoadWav("bassAm.wav");
-	wav[2].LoadWav("bassC.wav");
-	wav[3].LoadWav("bassD.wav");
-	wav[4].LoadWav("bassDm.wav");
-	wav[5].LoadWav("bassEm.wav");
-	wav[6].LoadWav("bassF.wav");
-	wav[7].LoadWav("bassG.wav");
+	wav[1].LoadWav("../resource/bass/bassAm.wav");
+	wav[2].LoadWav("../resource/bass/bassC.wav");
+	wav[3].LoadWav("../resource/bass/bassD.wav");
+	wav[4].LoadWav("../resource/bass/bassDm.wav");
+	wav[5].LoadWav("../resource/bass/bassEm.wav");
+	wav[6].LoadWav("../resource/bass/bassF.wav");
+	wav[7].LoadWav("../resource/bass/bassG.wav");
 
-	png1.Decode("bass1.png");
+	png1.Decode("../resource/img/bass1.png");
 	png1.Flip();
 	printf("rawpixel-brown-wood.png loaded, width is %d, height is %d\n", png1.wid, png1.hei);
 
-	png2.Decode("bass3.png");
+	png2.Decode("../resource/img/bass3.png");
 	png2.Flip();
 	printf("yann-allegre-dark-wood.png loaded, width is %d, height is %d\n", png2.wid, png2.hei);
 
-	png3.Decode("bass2.png");
+	png3.Decode("../resource/img/bass2.png");
 	png3.Flip();
 	printf("ruvim-noga-backgroud.png loaded, width is %d, height is %d\n", png3.wid, png3.hei);
 }
@@ -253,8 +280,8 @@ void Bass::drawBass() {
 	glEnd();*/
 	// draw strings
 	int y1;
-	for (int i = 0; i < 6; i++) {
-		y1 = (i + 1) * 35 + 13 + yC;
+	for (int i = 0; i < 4; i++) {
+		y1 = (i + 1) * 35 + 45 + yC;
 		glLineWidth(4.0f);
 		glBegin(GL_LINES);
 		glColor3ub(210, 210, 210);
