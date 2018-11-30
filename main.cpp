@@ -116,7 +116,7 @@ void mouseInputConv(int x, int y, int &key) {
 	else if (x > 200 && x < 400 && y > 300 && y < 600) {
 		key = FSKEY_Z;
 	}
-	else if (x > 370 && x < 430 && y > 600 && y < 650) {
+	else if (x > 0 && x < 800 && y > 600 && y < 650) {
 		key = FSKEY_T;
 	}
 }
@@ -130,7 +130,7 @@ void DrawToolBar() {
 	glVertex2d(0,650);
 	glEnd();
 
-	glColor3ub(255, 255, 255);
+	glColor3ub(255, 0, 0);
 	glBegin(GL_QUADS);
 	glVertex2d(0+5, 600+5);
 	glVertex2d(800-5, 600+5);
@@ -140,31 +140,18 @@ void DrawToolBar() {
 }
 
 void DrawStopButton() {
-	//int num_segments = 500;
-	//int r1 = 20;
-	//int cx = 400;
-	//int cy = 625;
-	//glColor3ub(0, 0, 0);
-	//glBegin(GL_TRIANGLE_FAN);
-	//for (int i = 0; i < num_segments; i++)
-	//{
-	//	double theta = 2.0*3.14159265*double(i) / double(num_segments);
-	//	double x = r1 * cos(theta);
-	//	double y = r1 * sin(theta);
-	//	glVertex2f(x + cx, y + cy);
-	//}
-	//glEnd();
-	int wid = 100;
-	int hei = 40;
-	int centerX = 400;
-	int centerY = 625;
-	glColor3ub(255, 0, 0);
+	
+	double wid = 100;
+	double hei = 40;
+	double centerX = 400;
+	double centerY = 625;
+	/*glColor3ub(255, 0, 0);
 	glBegin(GL_QUADS);
 	glVertex2d(centerX-wid/2, centerY-hei/2);
 	glVertex2d(centerX+wid / 2, centerY-hei / 2);
 	glVertex2d(centerX+wid / 2, centerY+hei / 2);
 	glVertex2d(centerX-wid / 2, centerY+ hei / 2);
-	glEnd();
+	glEnd();*/
 
 	glColor3ub(0, 0, 0);
 	glRasterPos2d(centerX-wid/2+20, centerY+hei/2-10);
