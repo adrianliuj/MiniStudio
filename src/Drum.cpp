@@ -48,6 +48,16 @@ void Drum::Load() {
 	if (YSOK != snareroll.LoadWav("../../MiniStudio/resource/drum/pearlkit-snareroll.wav")) {
 		printf("Failed to read snareroll\n");
 	}
+	{
+		png.Decode("../../MiniStudio/resource/img/studio.png");
+		png.Flip();
+		if (png.wid == 0) {
+			printf("Load unsuccessful.\n");
+		}
+		else {
+			printf("png.png loaded, width is %d, height is %d\n", png.wid, png.hei);
+		}
+	}
 
 }
 
@@ -98,6 +108,29 @@ void Drum::Play() {
 }
 
 void Drum::Draw() {
+	if (True_Drum == 0) {
+		glGenTextures(1, &textID_B);
+		glBindTexture(GL_TEXTURE_2D, textID_B);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, png.wid, png.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, png.rgba);
+	}
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, textID_B);
+	glBegin(GL_QUADS);
+	glTexCoord2d(1.0, 1.0); glVertex2i(0, 300);
+	glTexCoord2d(0.0, 1.0); glVertex2i(400, 300);
+	glTexCoord2d(0.0, 0.0); glVertex2i(400, 600);
+	glTexCoord2d(1.0, 0.0); glVertex2i(0, 600);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
 	Draw_Drum2(Drum2_X, Drum2_Y, DrumR2, Height2, Theta2, Rotation2);
 	{
 		if (key_ == FSKEY_S || key_ == FSKEY_D) {

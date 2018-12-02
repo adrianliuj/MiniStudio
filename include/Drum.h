@@ -26,7 +26,7 @@ private:
 	YsSoundPlayer::SoundData hihat, hitom, kick,
 		lowtom, ride, ridebell,
 		ridecrash, snare, snareroll;
-	
+	YsRawPngDecoder png;
 
 	//parameters for drawing
 	const double Height1 = 40;

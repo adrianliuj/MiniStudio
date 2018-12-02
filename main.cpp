@@ -28,6 +28,7 @@ bool playback = 0;
 int True_Bass = 0;
 int True_Drum = 0;
 GLuint textID;
+GLuint textID_B;
 // ------------------------------------------------------------------
 
 

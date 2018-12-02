@@ -13,6 +13,7 @@ extern double PI;
 extern YsRawPngDecoder wood;
 extern int True_Drum;
 extern GLuint textID;
+extern GLuint textID_B;
 extern int True_Bass;
 using namespace std;
 class Instrument {

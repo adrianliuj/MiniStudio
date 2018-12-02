@@ -127,17 +127,14 @@ void Bass::Load() {
 	wav[6].LoadWav("../../MiniStudio/resource/bass/bassF.wav");
 	wav[7].LoadWav("../../MiniStudio/resource/bass/bassG.wav");
 
-	png1.Decode("../../MiniStudio/resource/img/bass1.png");
+	png1.Decode("../../MiniStudio/resource/img/bass3.png");
 	png1.Flip();
-	printf("rawpixel-brown-wood.png loaded, width is %d, height is %d\n", png1.wid, png1.hei);
 
-	png2.Decode("../../MiniStudio/resource/img/bass3.png");
+	png2.Decode("../../MiniStudio/resource/img/bass1.png");
 	png2.Flip();
-	printf("yann-allegre-dark-wood.png loaded, width is %d, height is %d\n", png2.wid, png2.hei);
 
 	png3.Decode("../../MiniStudio//resource/img/bass2.png");
 	png3.Flip();
-	printf("ruvim-noga-backgroud.png loaded, width is %d, height is %d\n", png3.wid, png3.hei);
 }
 
 void Bass::Draw() {
