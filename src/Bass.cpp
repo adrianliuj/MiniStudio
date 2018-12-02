@@ -205,25 +205,27 @@ void Bass::setKey(int keyVal) {
 	key = keyVal;
 }
 
-void Bass::squareTextureMap(YsRawPngDecoder &png, int x1, int y1, int x2, int y2,
+void Bass::squareTextureMap(YsRawPngDecoder &png, int idx, int x1, int y1, int x2, int y2,
 	int x3, int y3, int x4, int y4) {
 
-	GLuint textID;
-	glGenTextures(1, &textID);
-	glBindTexture(GL_TEXTURE_2D, textID);
+	if (True_Bass<3) {
+		glGenTextures(1, &textID[idx]);
+		glBindTexture(GL_TEXTURE_2D, textID[idx]);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, png.wid, png.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, png.rgba);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, png.wid, png.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, png.rgba);
+		True_Bass ++;
+	}
 
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glColor4d(1.0, 1.0, 1.0, 1.0);
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textID);
+	glBindTexture(GL_TEXTURE_2D, textID[idx]);
 	glBegin(GL_QUADS);
 	glTexCoord2d(1.0, 1.0); glVertex2i(x1, y1);
 	glTexCoord2d(0.0, 1.0); glVertex2i(x2, y2);
@@ -236,10 +238,10 @@ void Bass::squareTextureMap(YsRawPngDecoder &png, int x1, int y1, int x2, int y2
 void Bass::drawBass() {
 	// draw Bass
 	// inc is incline for bass
-	squareTextureMap(png3, xC, yC, xC + xW, yC, xC + xW, yC + yW, xC, yC + yW);
+	squareTextureMap(png3, 2, xC, yC, xC + xW, yC, xC + xW, yC + yW, xC, yC + yW);
 	int inc = 30;
-	squareTextureMap(png1, xC, yC + inc, xC + xW, yC, xC + xW, yC + yW - inc, xC, yC + yW);
-	squareTextureMap(png2, xC, yC + inc + 20, xC + xW, yC + 20, xC + xW, yC + yW - 20 - inc, xC, yC + yW - 20);
+	squareTextureMap(png1, 0, xC, yC + inc, xC + xW, yC, xC + xW, yC + yW - inc, xC, yC + yW);
+	squareTextureMap(png2, 1, xC, yC + inc + 20, xC + xW, yC + 20, xC + xW, yC + yW - 20 - inc, xC, yC + yW - 20);
 
 	/*glBegin(GL_QUADS);
 	glColor3ub(180, 180, 180);

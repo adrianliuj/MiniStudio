@@ -39,12 +39,15 @@ private:
 	void drawBass();
 	void StopAll();
 	void resetState();
-	void squareTextureMap(YsRawPngDecoder &png, int x1, int y1, int x2, int y2,
+	void squareTextureMap(YsRawPngDecoder &png, int idx, int x1, int y1, int x2, int y2,
 		int x3, int y3, int x4, int y4);
 
 	YsRawPngDecoder png1, png2, png3;
 	chord chords[7];
 	YsSoundPlayer::SoundData wav[8]; 
+
+	GLuint textID[3];
+
 
 };
 #endif

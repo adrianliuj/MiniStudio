@@ -11,6 +11,9 @@ extern YsSoundPlayer player;
 
 extern double PI;
 extern YsRawPngDecoder wood;
+extern int True_Drum;
+extern GLuint textID;
+extern int True_Bass;
 using namespace std;
 class Instrument {
 public:

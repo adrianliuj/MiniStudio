@@ -25,7 +25,9 @@ double PI = 3.14159265;
 YsRawPngDecoder wood;
 bool record = 0;
 bool playback = 0;
-
+int True_Bass = 0;
+int True_Drum = 0;
+GLuint textID;
 // ------------------------------------------------------------------
 
 
@@ -106,15 +108,16 @@ void mouseInputConv(int x, int y, int &key) {
 		key = FSKEY_N;
 	}
 	// Drum section (WIP)
-	else if (x > 0 && x < 200 && y > 300 && y < 600) {
-		key = FSKEY_Q;
-	}
-	else if (x > 100 && x < 300 && y > 300 && y < 600) {
+	else if (x > 0 && x < 150 && y > 300 && y < 600) {
 		key = FSKEY_S;
 	}
-	else if (x > 200 && x < 400 && y > 300 && y < 600) {
-		key = FSKEY_Z;
+	else if (x > 150 && x < 250 && y > 300 && y < 600) {
+		key = FSKEY_X;
 	}
+	else if (x > 250 && x < 400 && y > 300 && y < 600) {
+		key = FSKEY_Q;
+	}
+	// Tool pannel
 	else if (x > 0 && x < 200 && y > 600 && y < 650) {
 		key = FSKEY_ESC;
 	}
@@ -233,10 +236,9 @@ void Render(void *incoming)
 }
 
 int main(void){
-	// flow control and file manipulation
-	//bool record = 0;
-	//bool playback = 0;
+
 	double dt = 0.0;
+
 	int playKey;
 	unsigned long playTime;
 	ofstream myfile;
@@ -376,7 +378,7 @@ int main(void){
         
         FsPollDevice();
         FsPushOnPaintEvent();
-        FsSleep(25);
+        FsSleep(1);
     }
     return 0;
 }

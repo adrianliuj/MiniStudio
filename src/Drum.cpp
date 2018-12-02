@@ -93,17 +93,6 @@ void Drum::Play() {
 		player.Stop(snareroll);
 		player.PlayOneShot(snareroll);
 		break;
-    case FSKEY_T:
-        player.Stop(snareroll);
-        player.Stop(ride);
-        player.Stop(snare);
-        player.Stop(lowtom);
-        player.Stop(kick);
-        player.Stop(ridecrash);
-        player.Stop(hitom);
-        player.Stop(ridebell);
-        player.Stop(hihat);
-        break;
 	}
 
 }
@@ -253,17 +242,6 @@ void Draw_Drum_Body1(double x, double y, double DrumR, double Height, double The
 	}
 
 	//Draw Drum Body
-	GLuint textID;
-	glGenTextures(1, &textID);
-	glBindTexture(GL_TEXTURE_2D, textID);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wood.wid, wood.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, wood.rgba);
-
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glColor4d(1.0, 1.0, 1.0, 1.0);
 
@@ -349,17 +327,20 @@ void Draw_Drum_Body2(double x, double y, double DrumR, double Height, double The
 		}
 	}
 	//Draw Drum Body
-	GLuint textID;
-	glGenTextures(1, &textID);
-	glBindTexture(GL_TEXTURE_2D, textID);
+	if (True_Drum == 0) {
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glGenTextures(1, &textID);
+		glBindTexture(GL_TEXTURE_2D, textID);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wood.wid, wood.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, wood.rgba);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wood.wid, wood.hei, 0, GL_RGBA, GL_UNSIGNED_BYTE, wood.rgba);
+
+		True_Drum = 1;
+	}
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glColor4d(1.0, 1.0, 1.0, 1.0);
 
