@@ -93,6 +93,17 @@ void Drum::Play() {
 		player.Stop(snareroll);
 		player.PlayOneShot(snareroll);
 		break;
+    case FSKEY_T:
+        player.Stop(snareroll);
+        player.Stop(ride);
+        player.Stop(snare);
+        player.Stop(lowtom);
+        player.Stop(kick);
+        player.Stop(ridecrash);
+        player.Stop(hitom);
+        player.Stop(ridebell);
+        player.Stop(hihat);
+        break;
 	}
 
 }
