@@ -1,9 +1,3 @@
-//  project.cpp
-//  MiniStudioProject
-//
-//  Created by Kelly Zhang on 11/5/18.
-//  Copyright © 2018 Kelly Zhang. All rights reserved.
-//
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
@@ -18,6 +12,7 @@
 #include "include\Keyboard.h"
 #include "include\Guitar.h"
 #include "include\Drum.h"
+#include <fstream>
 
 
 YsSoundPlayer player;
@@ -116,7 +111,10 @@ void mouseInputConv(int x, int y, int &key) {
 	else if (x > 200 && x < 400 && y > 300 && y < 600) {
 		key = FSKEY_Z;
 	}
-	else if (x > 0 && x < 800 && y > 600 && y < 650) {
+	else if (x > 0 && x < 400 && y > 600 && y < 650) {
+		key = FSKEY_ESC;
+	}
+	else if (x > 400 && x < 800 && y > 600 && y < 650) {
 		key = FSKEY_T;
 	}
 }
@@ -133,28 +131,25 @@ void DrawToolBar() {
 	glColor3ub(255, 0, 0);
 	glBegin(GL_QUADS);
 	glVertex2d(0+5, 600+5);
-	glVertex2d(800-5, 600+5);
-	glVertex2d(800-5, 650-5);
+	glVertex2d(400-5, 600+5);
+	glVertex2d(400-5, 650-5);
 	glVertex2d(0+5, 650-5);
+	glEnd();
+	glColor3ub(0, 0, 255);
+	glBegin(GL_QUADS);
+	glVertex2d(400 + 5, 600 + 5);
+	glVertex2d(800 - 5, 600 + 5);
+	glVertex2d(800 - 5, 650 - 5);
+	glVertex2d(400 + 5, 650 - 5);
 	glEnd();
 }
 
 void DrawStopButton() {
-	
-	double wid = 100;
-	double hei = 40;
-	double centerX = 400;
-	double centerY = 625;
-	/*glColor3ub(255, 0, 0);
-	glBegin(GL_QUADS);
-	glVertex2d(centerX-wid/2, centerY-hei/2);
-	glVertex2d(centerX+wid / 2, centerY-hei / 2);
-	glVertex2d(centerX+wid / 2, centerY+hei / 2);
-	glVertex2d(centerX-wid / 2, centerY+ hei / 2);
-	glEnd();*/
 
 	glColor3ub(0, 0, 0);
-	glRasterPos2d(centerX-wid/2+20, centerY+hei/2-10);
+	glRasterPos2d(160, 635);
+	YsGlDrawFontBitmap16x20("CLOSE");
+	glRasterPos2d(560, 635);
 	YsGlDrawFontBitmap16x20("STOP");
 }
 
@@ -170,11 +165,22 @@ void Render(void *incoming)
 	DrawToolBar();
 	DrawStopButton();
 
-    FsSwapBuffers();
+	FsSwapBuffers();
 
 }
 
 int main(void){
+	// flow control and file manipulation
+	bool record = 0;
+	bool playback = 0;
+	double dt = 0.0;
+	int playKey;
+	unsigned long playTime;
+	ofstream myfile;
+	ifstream readfile;
+	string line;
+
+
     printf("24-780 Engineering Computation\n");
     FsChangeToProgramDir();
     windowW = 800;
@@ -196,14 +202,83 @@ int main(void){
 		FsGetMouseEvent(lb, mb, rb, mx, my);
 		if (lb == 1) {
 			mouseInputConv(mx, my, key);
-			printf("%d %d %d %d\n", lb, mx, my, key);
 		}
 
         if(FSKEY_ESC==key)
         {
             terminate=true;
         }
-        
+		else if (FSKEY_SPACE == key && !playback)
+		{
+			record = !record;
+			if (record) {
+				myfile.open("recording.txt");
+				printf("File opened to record");
+				dt = 0.0;
+				FsPassedTime();
+			}
+			else {
+				myfile.close();
+				printf("File closed\n");
+			}
+		}
+		else if (FSKEY_ALT == key && !record)
+		{
+			playback = !playback;
+			if (playback) {
+				readfile.open("recording.txt");
+				if (readfile.is_open())
+				{
+					if (readfile.good())
+					{
+						getline(readfile, line, '\t');
+						if (line != "\0") { playKey = stoi(line); }
+						getline(readfile, line, '\t');
+						if (line != "\0") { playTime = stoi(line); }
+						dt = 0.0;
+						FsPassedTime();
+					}
+					else {
+						readfile.close();
+						cout << "File closed" << endl;
+						playback = false;
+					}
+				}
+				else
+				{
+					playback = false;
+					cout << "Unable to open file" << endl;
+				}
+			}
+			else {
+				if (readfile.is_open()) readfile.close();
+			}
+		}
+
+		if (NULL != key && record) {
+			dt += FsPassedTime();
+			myfile << key << "\t" << dt << "\t";
+		}
+
+		if (playback) {
+			if (readfile.good())
+			{
+				dt += FsPassedTime();
+				if (dt > playTime && key == NULL) {
+					key = playKey;
+					getline(readfile, line, '\t');
+					if (line != "\0") { playKey = stoi(line); }
+					getline(readfile, line, '\t');
+					if (line != "\0") { playTime = stoi(line); }
+				}
+			}
+			else {
+				readfile.close();
+				playback = false;
+				cout << "File closed" << endl;
+			}
+		}
+
         guitar.setKey(key);
         guitar.Play();
         
