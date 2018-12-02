@@ -2,11 +2,11 @@
 #Authors: KR Qian, CT Lin, KX Zhang, CX Wang and JF Liu  
 MiniStudio is a music playing and recording software that enables user to play and keyboard, bass, guitar and drum. Besides, user can record the music they played and play it back afterwards.
 
-#File structures
+#File structures  
 include: All the header files.  
 src: All the source files that Implement menber functions.  
 resource: All the music files and image files.  
-main.cpp: The main funciton.  
+main.cpp: The main funciton and global variable definition.  
 
 #Dependencies(External Libraries)
 No external libararies. Only libararies provided in class are used.
