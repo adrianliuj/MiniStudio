@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-#define PI 3.14159265
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -16,11 +15,14 @@
 
 
 YsSoundPlayer player;
+
 int windowW,windowH;
 Guitar guitar;
 Keyboard keyboard;
 Bass bass;
 Drum drum;
+double PI = 3.14159265;
+YsRawPngDecoder wood;
 
 // ------------------------------------------------------------------
 
@@ -179,7 +181,16 @@ int main(void){
 	ofstream myfile;
 	ifstream readfile;
 	string line;
-
+	{
+		wood.Decode("../../MiniStudio/resource/img/bass1.png");
+		wood.Flip();
+		if (wood.wid == 0) {
+			printf("Load unsuccessful.\n");
+		}
+		else {
+			printf("wood.png loaded, width is %d, height is %d\n", wood.wid, wood.hei);
+		}
+	}
 
     printf("24-780 Engineering Computation\n");
     FsChangeToProgramDir();

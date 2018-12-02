@@ -9,6 +9,8 @@
 #include "yspng.h"
 extern YsSoundPlayer player;
 
+extern double PI;
+extern YsRawPngDecoder wood;
 using namespace std;
 class Instrument {
 public:
