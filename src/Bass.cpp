@@ -56,49 +56,49 @@ void chord::drawChord(int i) {
         glEnd();
     }
     glColor3ub(50, 0, 0);
-    glRasterPos2d(getX() + 5, getY() + 110);
+    glRasterPos2i(getX() + 5, getY() + 110);
     // will change name later, don't know the names
     switch (i) {
         case 0:
             YsGlDrawFontBitmap16x20("Am");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600-10);
+            glRasterPos2i(getX() + 6, 600-10);
             YsGlDrawFontBitmap16x20("U");
             break;
         case 1:
             YsGlDrawFontBitmap16x20("C");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("I");
             break;
         case 2:
             YsGlDrawFontBitmap16x20("D");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("O");
             break;
         case 3:
             YsGlDrawFontBitmap16x20("Dm");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("P");
             break;
         case 4:
             YsGlDrawFontBitmap16x20("Em");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("J");
             break;
         case 5:
             YsGlDrawFontBitmap16x20("F");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("K");
             break;
         case 6:
             YsGlDrawFontBitmap16x20("G");
             glColor3ub(255, 0, 0);
-            glRasterPos2d(getX() + 6, 600 - 10);
+            glRasterPos2i(getX() + 6, 600 - 10);
             YsGlDrawFontBitmap16x20("L");
             break;
         default:

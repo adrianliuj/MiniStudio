@@ -23,6 +23,8 @@ Bass bass;
 Drum drum;
 double PI = 3.14159265;
 YsRawPngDecoder wood;
+bool record = 0;
+bool playback = 0;
 
 // ------------------------------------------------------------------
 
@@ -113,11 +115,17 @@ void mouseInputConv(int x, int y, int &key) {
 	else if (x > 200 && x < 400 && y > 300 && y < 600) {
 		key = FSKEY_Z;
 	}
-	else if (x > 0 && x < 400 && y > 600 && y < 650) {
+	else if (x > 0 && x < 200 && y > 600 && y < 650) {
 		key = FSKEY_ESC;
 	}
-	else if (x > 400 && x < 800 && y > 600 && y < 650) {
+	else if (x > 200 && x < 400 && y > 600 && y < 650) {
 		key = FSKEY_T;
+	}
+	else if (x > 400 && x < 600 && y > 600 && y < 650) {
+		key = FSKEY_SPACE;
+	}
+	else if (x > 600 && x < 800 && y > 600 && y < 650) {
+		key = FSKEY_ALT;
 	}
 }
 
@@ -129,30 +137,83 @@ void DrawToolBar() {
 	glVertex2d(800,650);
 	glVertex2d(0,650);
 	glEnd();
-
-	glColor3ub(255, 0, 0);
+	
+	glShadeModel(GL_SMOOTH);
 	glBegin(GL_QUADS);
+	glColor3ub(224, 224, 224);
 	glVertex2d(0+5, 600+5);
-	glVertex2d(400-5, 600+5);
-	glVertex2d(400-5, 650-5);
+	glColor3ub(224, 224, 224);
+	glVertex2d(200-5, 600+5);
+	glColor3ub(96, 96, 96);
+	glVertex2d(200-5, 650-5);
+	glColor3ub(96, 96, 96);
 	glVertex2d(0+5, 650-5);
 	glEnd();
-	glColor3ub(0, 0, 255);
+	glShadeModel(GL_SMOOTH);
 	glBegin(GL_QUADS);
+	glColor3ub(224, 224, 224);
+	glVertex2d(200 + 5, 600 + 5);
+	glColor3ub(224, 224, 224);
+	glVertex2d(400 - 5, 600 + 5);
+	glColor3ub(96, 96, 96);
+	glVertex2d(400 - 5, 650 - 5);
+	glColor3ub(96, 96, 96);
+	glVertex2d(200 + 5, 650 - 5);
+	glEnd();
+
+	int R1, G1, B1, R2, G2, B2;
+	if (record) {
+		R1 = 255, G1 = 153, B1 = 153;
+		R2 = 204, G2 = 0, B2 = 0;
+	}
+	else {
+		R1 = 224, G1 = 224, B1 = 224;
+		R2 = 96, G2 = 96, B2 = 96;
+	}
+	int R3, G3, B3, R4, G4, B4;
+	if (playback) {
+		R3 = 153, G3 = 255, B3 = 204;
+		R4 = 0, G4 = 204, B4 = 102;
+	}
+	else {
+		R3 = 224, G3 = 224, B3 = 224;
+		R4 = 96, G4 = 96, B4 = 96;
+	}
+	glShadeModel(GL_SMOOTH);
+	glBegin(GL_QUADS);
+	glColor3ub(R1, G1, B1);
 	glVertex2d(400 + 5, 600 + 5);
-	glVertex2d(800 - 5, 600 + 5);
-	glVertex2d(800 - 5, 650 - 5);
+	glColor3ub(R1, G1, B1);
+	glVertex2d(600 - 5, 600 + 5);
+	glColor3ub(R2, G2, B2);
+	glVertex2d(600 - 5, 650 - 5);
+	glColor3ub(R2, G2, B2);
 	glVertex2d(400 + 5, 650 - 5);
+	glEnd();
+	glShadeModel(GL_SMOOTH);
+	glBegin(GL_QUADS);
+	glColor3ub(R3, G3, B3);
+	glVertex2d(600 + 5, 600 + 5);
+	glColor3ub(R3, G3, B3);
+	glVertex2d(800 - 5, 600 + 5);
+	glColor3ub(R4, G4, B4);
+	glVertex2d(800 - 5, 650 - 5);
+	glColor3ub(R4, G4, B4);
+	glVertex2d(600 + 5, 650 - 5);
 	glEnd();
 }
 
 void DrawStopButton() {
 
 	glColor3ub(0, 0, 0);
-	glRasterPos2d(160, 635);
+	glRasterPos2d(70, 635);
 	YsGlDrawFontBitmap16x20("CLOSE");
-	glRasterPos2d(560, 635);
+	glRasterPos2d(265, 635);
 	YsGlDrawFontBitmap16x20("STOP");
+	glRasterPos2d(450, 635);
+	YsGlDrawFontBitmap16x20("RECORD");
+	glRasterPos2d(640, 635);
+	YsGlDrawFontBitmap16x20("PLAYBACK");
 }
 
 void Render(void *incoming)
@@ -173,8 +234,8 @@ void Render(void *incoming)
 
 int main(void){
 	// flow control and file manipulation
-	bool record = 0;
-	bool playback = 0;
+	//bool record = 0;
+	//bool playback = 0;
 	double dt = 0.0;
 	int playKey;
 	unsigned long playTime;
@@ -315,7 +376,7 @@ int main(void){
         
         FsPollDevice();
         FsPushOnPaintEvent();
-        FsSleep(1);
+        FsSleep(25);
     }
     return 0;
 }
