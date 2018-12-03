@@ -1,8 +1,4 @@
-//#include "Instrument.h"
-#include "../include/Guitar.h"
-//#include "yspng.h"
-//#include <math.h>
-//#include "ysglfontdata.h"
+#include "Guitar.h"
 
 void GuitarChordBlock::DrawChordBlock(int chordNum){
     
@@ -159,43 +155,43 @@ void Guitar::Play(){
         case FSKEY_F:
             StopAll();
             blkEm.isPlaying=true;
-            Em.LoadWav("../../MiniStudio/resource/guitar/Em.wav");
+            Em.LoadWav("Em.wav");
             player.PlayOneShot(Em);
             break;
         case FSKEY_G:
             StopAll();
             blkAm.isPlaying=true;
-            Am.LoadWav("../../MiniStudio/resource/guitar/Am.wav");
+            Am.LoadWav("Am.wav");
             player.PlayOneShot(Am);
             break;
         case FSKEY_H:
             StopAll();
             blkF.isPlaying=true;
-            F.LoadWav("../../MiniStudio/resource/guitar/F.wav");
+            F.LoadWav("F.wav");
             player.PlayOneShot(F);
             break;
         case FSKEY_V:
             StopAll();
             blkC.isPlaying=true;
-            C.LoadWav("../../MiniStudio/resource/guitar/C.wav");
+            C.LoadWav("C.wav");
             player.PlayOneShot(C);
             break;
         case FSKEY_B:
             StopAll();
             blkD.isPlaying=true;
-            D.LoadWav("../../MiniStudio/resource/guitar/D.wav");
+            D.LoadWav("D.wav");
             player.PlayOneShot(D);
             break;
         case FSKEY_N:
             StopAll();
             blkG.isPlaying=true;
-            G.LoadWav("../../MiniStudio/resource/guitar/G.wav");
+            G.LoadWav("G.wav");
             player.PlayOneShot(G);
             break;
         case FSKEY_M:
             StopAll();
             blkDm.isPlaying=true;
-            Dm.LoadWav("../../MiniStudio/resource/guitar/Dm.wav");
+            Dm.LoadWav("Dm.wav");
             player.PlayOneShot(Dm);
             break;
         case FSKEY_T:

@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <math.h>
 #include "fssimplewindow.h"
 #include "yssimplesound.h"
 #include "ysglfontdata.h"
@@ -26,3 +27,4 @@ protected:
     int key;
 };
 #endif
+

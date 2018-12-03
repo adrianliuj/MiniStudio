@@ -1,4 +1,5 @@
-#include "../include/Keyboard.h"
+//#include "Instrument.h"
+#include "Keyboard.h"
 
 Keyboard::Keyboard(){
 	//key_ = -1 because legal input is from 0 - 9
@@ -27,18 +28,16 @@ Keyboard::Keyboard(){
 	}
 }
 void Keyboard::Load() {
-//	C:\Often\24780\mini\new_proj\Debug is the program dir(exe dir)
-	FsChangeToProgramDir();
-	samples.push_back("../../MiniStudio/resource/keyboard/00.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/01.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/02.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/03.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/04.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/05.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/06.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/07.wav");
-	samples.push_back("../../MiniStudio/resource/keyboard/08.wav");
-	samples.push_back("../../MiniStudio//resource/keyboard/09.wav");
+	samples.push_back("00.wav");
+	samples.push_back("01.wav");
+	samples.push_back("02.wav");
+	samples.push_back("03.wav");
+	samples.push_back("04.wav");
+	samples.push_back("05.wav");
+	samples.push_back("06.wav");
+	samples.push_back("07.wav");
+	samples.push_back("08.wav");
+	samples.push_back("09.wav");
 	return;
 }
 void Keyboard::Draw() {
@@ -99,7 +98,7 @@ void Keyboard::Draw() {
 		// draw pressed key
 		if (key_ == i + 1 ||(key_ == 0 && i == 9)) {
 			glColor4f(0, 0, 0, alpha_);
-			cout << "alpha = " << alpha_ << endl;
+//            cout << "alpha = " << alpha_ << endl;
 			glBegin(GL_QUADS);
 			glVertex2i(left_ + i * keyW_, top_);
 			glVertex2i(left_ + (i + 1) * keyW_, top_);
@@ -117,13 +116,15 @@ void Keyboard::Draw() {
 		glVertex2i(left_ + i * keyW_ + radius_, top_ + keyH_);
 		glVertex2i(left_ + i * keyW_, top_ + keyH_ - radius_);
 		glEnd();
-		// draw character
-		glRasterPos2d(left_ + i * keyW_ + keyW_ / 2 - 4, top_ + 140);
-		glColor3ub(255, 0, 0);
-		if (i != 9)
-			YsGlDrawFontBitmap10x14(to_string(i + 1).c_str());
-		else 
-			YsGlDrawFontBitmap10x14(to_string(0).c_str());
+        
+        // draw character
+        glRasterPos2d(left_ + i * keyW_ + keyW_ / 2 - 4, top_ + 140);
+        glColor3ub(255, 0, 0);
+        if (i != 9)
+            YsGlDrawFontBitmap10x14(to_string(i + 1).c_str());
+        else
+            YsGlDrawFontBitmap10x14(to_string(0).c_str());
+        
 	}
 	// draw black chord
 	for (int i : blackpos_) {
