@@ -1,5 +1,5 @@
 //#include "Instrument.h"
-#include "Keyboard.h"
+#include "../include/Keyboard.h"
 
 Keyboard::Keyboard(){
 	//key_ = -1 because legal input is from 0 - 9
@@ -28,16 +28,16 @@ Keyboard::Keyboard(){
 	}
 }
 void Keyboard::Load() {
-	samples.push_back("00.wav");
-	samples.push_back("01.wav");
-	samples.push_back("02.wav");
-	samples.push_back("03.wav");
-	samples.push_back("04.wav");
-	samples.push_back("05.wav");
-	samples.push_back("06.wav");
-	samples.push_back("07.wav");
-	samples.push_back("08.wav");
-	samples.push_back("09.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/00.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/01.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/02.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/03.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/04.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/05.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/06.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/07.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/08.wav");
+	samples.push_back("../../MiniStudio/resource/keyboard/09.wav");
 	return;
 }
 void Keyboard::Draw() {
